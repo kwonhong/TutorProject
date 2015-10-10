@@ -1,5 +1,6 @@
 package com.springapp.mvc;
 
+import com.springapp.mvc.config.InputFileDeclared;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,16 +26,12 @@ public class LoginController {
 		//TODO Read UserLogin Data from loginData.txt
 		List<LoginData> loginDataList = getAllUserLoginData();
 
-		//TODO Check if user data exists within the list.
+
 		String email = loginData.getEmail();
 		String password = loginData.getPassword();
 
-		//TODO If user data exists, go to first page
-
-		//TODO If user data doesn't exist or invalid, go to login page with error message.
-
 		// Redirecting Example
-		if (isLoginValid()) {
+		if (isLoginValid(email, password)) {
 			return "dashBoard";
 		} else {
 			return "login";
@@ -47,13 +44,20 @@ public class LoginController {
 	}
 
 	// Reading all the login information from the specific file name;
-	private List<LoginData> getAllUserLoginData() {
-		return null;
+	private List<LoginData> getAllUserLoginData() throws java.io.IOException{
+		InputFileDeclared file = new InputFileDeclared("UserLoginData.txt");
 	}
 
-	//TODO Do Implementation
-	private boolean isLoginValid() {
-		return false;
+
+	private boolean isLoginValid(email, password)
+	{
+		if(email == loginData.getEmail() && password == loginData.getPassword){
+			return true;
+		}
+		else {
+			system.out.println("Invalid Email or Password");
+			return false;
+		}
 	}
 
 

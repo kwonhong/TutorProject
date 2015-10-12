@@ -7,19 +7,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
     <%-- Css Plugins--%>
     <link href='<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />' rel="stylesheet">
     <link href='<c:url value="/resources/dist/css/sb-admin-2.css" />' rel="stylesheet">
     <link href='<c:url value="/resources/bower_components/font-awesome/css/font-awesome.min.css"/>' rel="stylesheet"
           type="text/css"/>
-
-
+    <title></title>
 </head>
 <body>
-Dashboard
 
-<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>
+<div class="container">
+    <h2>Event Registration</h2>
+    <form class="form-horizontal" role="form" method="POST">
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Event Title:</label>
+            <div class="col-sm-10">
+                <input type="input" class="form-control" name="title" placeholder="Enter Title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Event Description:</label>
+            <div class="col-sm-10">
+                <input type="input" class="form-control" name="description" placeholder="Enter Description">
+            </div>
+        </div>
+        <button type="submit" onclick="form.action='eventCreateSubmit'" class="btn btn-default">Submit</button>
+    </form>
+</div>
 
 </body>
 </html>

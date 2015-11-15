@@ -1,0 +1,44 @@
+CREATE TABLE IF NOT EXISTS user (
+ID TEXT,
+Password TEXT,
+FirstName TEXT,
+LastName TEXT,
+Address TEXT,
+City TEXT,
+Email TEXT,
+PostalCode TEXT,
+Age int,
+Gender TEXT
+);
+
+CREATE TABLE IF NOT EXISTS event (
+ID TEXT,
+Name TEXT,
+Address TEXT,
+City TEXT,
+PostalCode TEXT,
+Type TEXT,
+Gender TEXT,
+Date date,
+startTime time,
+minimumAge int,
+maximumAge int,
+numParticipants int,
+Capacity int,
+Description TEXT
+);
+
+INSERT INTO user VALUES('user1', '1234', 'Tom', 'Smith', '23 Hollywood Avenue', 'Toronto', 'user1@gmail.com', 'M2N 7L8', 22, 'Male');
+INSERT INTO user VALUES('user2', '0000', 'Tim', 'Schmit', '20 College Street', 'Toronto', 'user2@gmail.com', 'M5G 1K2', 25, 'Male');
+INSERT INTO user VALUES('user3', 'user3password', 'Jenna', 'Ferguson', '252 Queen ST W', 'Toronto', 'user3@gmail.com', 'M5V 1Z8', 34, 'Female');
+INSERT INTO user VALUES('alex08', 'password', 'Alex', 'Choi', '2181 Yonge Street', 'Toronto', 'alex08@gmail.com', 'M4S 3H8', 17, 'Male');
+INSERT INTO user VALUES('tlqkfsha', 'rotlqkf', 'Tom', 'Cruise', '250 Sheppard Avenue West', 'Toronto', 'tomcruise@gmail.com', 'M2N 1N3', 53, 'Male');
+INSERT INTO user VALUES('byungshin', '1234', 'SeongYell', 'Lee', '386 Yonge Street', 'Toronto', 'sele06@gmail.com', 'M5B 0A5', 23, 'Male');
+INSERT INTO user VALUES('latte', 'rnldyal', 'Latte', 'Kim', '55 Bloor St East', 'Toronto', 'latte@gmail.com', 'M4W 3W6', 1, 'Male');
+
+
+INSERT INTO event VALUES('1447546541810', 'Trinity Square', '19 Trinity Square', 'Toronto', 'M5G 1B1', 'Full', 'Mixed', '2015-12-03', '19:30:00', 23, 29, 0, 22, 'Young Adult Game at Trinity Square. Starts at 7:30 in the evening');
+INSERT INTO event VALUES('1447545241810', 'Claude Watson School Field', '130 Doris Avenue', 'Toronto', 'M2N 0A8', 'Full', 'Guys', '2015-12-05', '17:30:00', 30, 50, 0, 22, '30 to 50 Year Old Guys Only Game at Claude Watson Turf. Start at 5:30 pm');
+INSERT INTO event VALUES('1447599541810', 'Eglington Flats', '101 Emmett Ave', 'Toronto', 'M6M 2E5', 'Full', 'Guys', '2015-12-06', '19:00:00', 18, 25, 0, 22, 'Student Game at Eglington Flats.');
+INSERT INTO event VALUES('144957641810', 'North York Civic Soccer Fields', '', 'Toronto', 'M2R 1N7', 'Half', 'Girls', '2015-12-06', '19:30:00', 19, 99, 0, 10, 'All Age Girls Game at one of North York Civic Centre's soccer fields!');
+INSERT INTO event VALUES('1542546541810', 'Sunnybrook Park', '1132 Leslie St', 'Toronto', '', 'Half', 'Mixed', '2015-12-12', '13:30:00', 55, 99, 0, 10, 'Seniors Half Game at Sunnybrooks.');

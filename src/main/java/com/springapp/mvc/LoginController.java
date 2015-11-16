@@ -5,7 +5,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.List;
 
@@ -23,15 +28,18 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, @ModelAttribute("SpringWeb") LoginData loginData) {
 
-        //TODO Read UserLogin Data from loginData.txt
-        List<LoginData> loginDataList;
-
         String id = loginData.getId();
         String password = loginData.getPassword();
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
 
-        if (isValidLoginData(id, password)) {
-            return "redirect:/dashBoard";
+        try {
+            if (isValidLoginData(id, password)) {
+                session.setAttribute("ID", id);
+                return "redirect:/dashBoard";
+            }
         }
+        catch (SQLException e){}
         return "login";
     }
 
@@ -57,11 +65,26 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registerSubmit", method = {RequestMethod.POST})
-    public String registerUser(ModelMap modelMap, @ModelAttribute("SpringWeb") LoginData loginData) {
-        System.out.println(loginData.getEmail());
-        System.out.println(loginData.getPassword());
+    public String registerUser(ModelMap modelMap, @ModelAttribute("SpringWeb") UserData userData) throws SQLException{
+        String id = userData.getId();
+        String password = userData.getPassword();
+        String fname = userData.getFname();
+        String lname = userData.getLname();
+        String city = userData.getCity();
+        String address = userData.getAddress();
+        String email = userData.getEmail();
+        String gender = userData.getGender();
+        String postalcode = userData.getPostalcode();
+        int age = userData.getAge();
 
-        //TODO Save the user information in MySQL Table.
+        Statement stmt = DBCon.createStatement();
+        String sql = "SELECT * FROM user WHERE ID = '"+id+"' OR Email = '"+email+"'";
+        ResultSet rs = stmt.executeQuery(sql);
+        if (rs.next()){
+            return "redirect: /register";
+        }
+        sql = "INSERT INTO user VALUES(('"+id+"', '"+password+"', '"+fname+"', '"+lname+"', '"+address+"', '"+city+"', '"+email+"', '"+postalcode+"', "+age+", '"+gender+"')";
+        stmt.executeUpdate(sql);
         return "redirect:/dashBoard";
     }
 

@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.dao.EventDao;
+import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,8 @@ public class LoginController {
    // private static final String DEFAULT_EMAIL = "email@email.com";
     //private static final String DEFAULT_PASSWORD = "password";
 
-//    @Autowired
-//    private UserDao userDao;
+     @Autowired
+     private UserDao userDao;
 
     @Autowired
     private EventDao eventDao;
@@ -35,7 +36,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, @ModelAttribute("SpringWeb") LoginData loginData) {
 
-//        List<UserData> userDataList = userDao.findAllLoginData();
+        List<UserData> userDataList = userDao.findAllLoginData();
         List<Event> events = eventDao.findAllEvents();
 
         String id = loginData.getId();

@@ -1,19 +1,47 @@
 package com.springapp.mvc;
 
-/**
- * Created by Neoburi on 15/11/2015.
- */
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Date;
+
+
 public class UserData {
-    private String fname;
-    private String lname;
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "password", nullable =  false)
     private String password;
+
+    @Column(name = "userName", nullable = false)
+    private String userName;
+
+    @Column(name ="fname", nullable = false)
+    private String fname;
+
+    @Column(name ="address", nullable = false)
     private String address;
-    private String postalcode;
-    private int age;
-    private String gender;
-    private String email;
+
+    @Column(name ="city", nullable = false)
     private String city;
+
+    @Column(name ="postalCode", nullable = false)
+    private String postalcode;
+
+    @Column(name ="gender", nullable = false)
+    private String gender;
+
+    @Column(name ="lname", nullable = false)
+    private String  lname;
+
+    @Column(name ="age", nullable = false)
+    private int age;
+
+    @Column(name ="email", nullable = false)
+    private String email;
 
     public String getFname() {
         return fname;
@@ -31,12 +59,12 @@ public class UserData {
         this.lname = lname;
     }
 
-    public String getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

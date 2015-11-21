@@ -45,7 +45,7 @@ public class LoginController {
         } else {
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession();
-            session.setAttribute("ID", foundUsers.get(0).getId());
+            session.setAttribute("userID", foundUsers.get(0).getId());
             return "redirect:/dashBoard";
         }
     }

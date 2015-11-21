@@ -8,7 +8,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,6 +29,9 @@ public class DashBoardController {
         List<Event> eventList = eventDao.findAllEvents();
         model.addAttribute("eventList", eventList);
 
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        int userID = (int) session.getAttribute("userID");
         return "dashBoard";
     }
 

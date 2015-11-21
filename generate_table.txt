@@ -1,6 +1,9 @@
-CREATE TABLE IF NOT EXISTS user (
-ID TEXT,
-Password TEXT,
+CREATE DATABASE footyFixDatabase;
+
+CREATE TABLE IF NOT EXISTS userdata (
+id INT auto_increment,
+username TEXT NOT NULL,
+Password TEXT NOT NULL,
 FirstName TEXT,
 LastName TEXT,
 Address TEXT,
@@ -8,11 +11,12 @@ City TEXT,
 Email TEXT,
 PostalCode TEXT,
 Age int,
-Gender TEXT
+Gender TEXT,
+PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS event (
-ID TEXT,
+id INT auto_increment,
 Name TEXT,
 Address TEXT,
 City TEXT,
@@ -20,12 +24,12 @@ PostalCode TEXT,
 Type TEXT,
 Gender TEXT,
 Date date,
-startTime time,
 minimumAge int,
 maximumAge int,
 numParticipants int,
 Capacity int,
-Description TEXT
+Description TEXT,
+PRIMARY KEY (id)
 );
 
 INSERT INTO user VALUES('user1', '1234', 'Tom', 'Smith', '23 Hollywood Avenue', 'Toronto', 'user1@gmail.com', 'M2N 7L8', 22, 'Male');

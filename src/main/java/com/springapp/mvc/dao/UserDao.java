@@ -17,4 +17,8 @@ public class UserDao extends AbstractDao {
         return userData;
     }
 
+    public void createUser(UserData userData) {
+        persist(userData);
+    }
+
 }

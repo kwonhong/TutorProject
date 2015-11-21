@@ -73,25 +73,10 @@ public class LoginController {
 
     @RequestMapping(value = "/registerSubmit", method = {RequestMethod.POST})
     public String registerUser(ModelMap modelMap, @ModelAttribute("SpringWeb") UserData userData) throws SQLException {
-//        String id = userData.getId();
-//        String password = userData.getPassword();
-//        String fname = userData.getFname();
-//        String lname = userData.getLname();
-//        String city = userData.getCity();
-//        String address = userData.getAddress();
-//        String email = userData.getEmail();
-//        String gender = userData.getGender();
-//        String postalcode = userData.getPostalcode();
-//        int age = userData.getAge();
-//
-//        Statement stmt = DBCon.createStatement();
-//        String sql = "SELECT * FROM user WHERE ID = '"+id+"' OR Email = '"+email+"'";
-//        ResultSet rs = stmt.executeQuery(sql);
-//        if (rs.next()){
-//            return "redirect: /register";
-//        }
-//        sql = "INSERT INTO user VALUES(('"+id+"', '"+password+"', '"+fname+"', '"+lname+"', '"+address+"', '"+city+"', '"+email+"', '"+postalcode+"', "+age+", '"+gender+"')";
-//        stmt.executeUpdate(sql);
+        //TODO Check fields
+
+        userDao.createUser(userData);
+
         return "redirect:/dashBoard";
     }
 

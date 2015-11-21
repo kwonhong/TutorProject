@@ -31,7 +31,7 @@
     <p>
       <label>Email *
       </label>
-      <input type="text"/>
+      <input name ="email" type="text"/>
       <label>Repeat email *
       </label>
       <input type="text"/>

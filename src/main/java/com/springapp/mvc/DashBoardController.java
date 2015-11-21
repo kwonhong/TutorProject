@@ -1,10 +1,15 @@
 package com.springapp.mvc;
 
+import com.springapp.mvc.dao.EventDao;
+import com.springapp.mvc.event.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * Created by honkwon on 15-10-12.
@@ -13,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DashBoardController {
 
+    @Autowired
+    private EventDao eventDao;
+
     @RequestMapping(value = "/dashBoard", method = RequestMethod.GET)
     public String defaultPage(ModelMap model) {
-        //TODO Populate All the Soccer Events
-
-
-        //TODO Display All the Soccer Events
-
+        List<Event> eventList = eventDao.findAllEvents();
+        model.addAttribute("eventList", eventList);
 
         return "dashBoard";
     }

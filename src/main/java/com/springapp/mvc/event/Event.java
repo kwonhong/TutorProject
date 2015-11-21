@@ -8,10 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-/**
- * Created by honkwon on 15-11-21.
- */
-
 @Entity
 @Table(name = "event")
 public class Event {
@@ -20,40 +16,132 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name ="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name ="address", nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name ="city", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name ="postalCode", nullable = false)
+    @Column(name = "postalCode", nullable = false)
     private String postalCode;
 
-    @Column(name ="gender", nullable = false)
+    @Column(name = "gender", nullable = false)
     private String gender;
 
-    @Column(name ="date", nullable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name ="minimumAge", nullable = false)
+    @Column(name = "minimumAge", nullable = false)
     private int minimumAge;
 
-    @Column(name ="maximumAge", nullable = false)
+    @Column(name = "maximumAge", nullable = false)
     private int maximumAge;
 
-    @Column(name ="numParticipants", nullable = false)
+    @Column(name = "numParticipants", nullable = false)
     private int numParticipants;
 
-    @Column(name ="capacity", nullable = false)
+    @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    @Column(name ="Description", nullable = false)
+    @Column(name = "Description", nullable = false)
     private String Description;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getMinimumAge() {
+        return minimumAge;
+    }
+
+    public void setMinimumAge(int minimumAge) {
+        this.minimumAge = minimumAge;
+    }
+
+    public int getMaximumAge() {
+        return maximumAge;
+    }
+
+    public void setMaximumAge(int maximumAge) {
+        this.maximumAge = maximumAge;
+    }
+
+    public int getNumParticipants() {
+        return numParticipants;
+    }
+
+    public void setNumParticipants(int numParticipants) {
+        this.numParticipants = numParticipants;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
 }

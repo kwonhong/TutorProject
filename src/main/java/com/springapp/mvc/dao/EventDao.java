@@ -14,9 +14,9 @@ import java.util.List;
 public class EventDao extends AbstractDao {
 
     public List<Event> findAllEvents() {
-//        getSession().createCriteria(Event.class).list();
-        String sqlQuery = "SELECT * from event";
-        return getSession().createSQLQuery(sqlQuery).list();
+        return getSession().createCriteria(Event.class).list();
+//        String sqlQuery = "SELECT * from event";
+//        return getSession().createSQLQuery(sqlQuery).list();
     }
 
     public Event findEventById(int eventID) {

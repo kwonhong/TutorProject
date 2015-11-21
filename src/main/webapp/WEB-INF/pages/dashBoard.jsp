@@ -18,8 +18,13 @@
 </head>
 <body>
 Dashboard
+<hr>
 
-<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>
+<c:forEach var="event" items="${eventList}" >
+    <span>${event.name}</span>
+</c:forEach>
+
+<%--<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>--%>
 
 </body>
 </html>

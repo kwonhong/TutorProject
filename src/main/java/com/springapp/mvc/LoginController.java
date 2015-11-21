@@ -1,20 +1,14 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.dao.EventDao;
-import com.springapp.mvc.dao.UserDao;
-import com.springapp.mvc.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class LoginController {
@@ -22,8 +16,8 @@ public class LoginController {
    // private static final String DEFAULT_EMAIL = "email@email.com";
     //private static final String DEFAULT_PASSWORD = "password";
 
-     @Autowired
-     private UserDao userDao;
+//    @Autowired
+//    private UserDao userDao;
 
     @Autowired
     private EventDao eventDao;
@@ -36,22 +30,23 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, @ModelAttribute("SpringWeb") LoginData loginData) {
 
-        List<UserData> userDataList = userDao.findAllLoginData();
-        List<Event> events = eventDao.findAllEvents();
-
-        String id = loginData.getId();
-        String password = loginData.getPassword();
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession();
-
-        try {
-            if (isValidLoginData(id, password)) {
-                session.setAttribute("ID", id);
-                return "redirect:/dashBoard";
-            }
-        }
-        catch (SQLException e){}
-        return "login";
+        return "redirect:/dashBoard";
+//        List<UserData> userDataList = userDao.findAllLoginData();
+//        List<Event> events = eventDao.findAllEvents();
+//
+//        String id = loginData.getId();
+//        String password = loginData.getPassword();
+//        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//        HttpSession session = attr.getRequest().getSession();
+//
+//        try {
+//            if (isValidLoginData(id, password)) {
+//                session.setAttribute("ID", id);
+//                return "redirect:/dashBoard";
+//            }
+//        }
+//        catch (SQLException e){}
+//        return "login";
     }
 
     private boolean isValidLoginData(String identification, String password) throws SQLException{

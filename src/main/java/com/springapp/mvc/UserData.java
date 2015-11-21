@@ -1,12 +1,15 @@
 package com.springapp.mvc;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.Table;
 
 
+@Entity
+@Table(name = "userData")
 public class UserData {
 
     @Id
@@ -19,8 +22,8 @@ public class UserData {
     @Column(name = "userName", nullable = false)
     private String userName;
 
-    @Column(name ="fname", nullable = false)
-    private String fname;
+    @Column(name ="firstname", nullable = false)
+    private String firstName;
 
     @Column(name ="address", nullable = false)
     private String address;
@@ -29,13 +32,13 @@ public class UserData {
     private String city;
 
     @Column(name ="postalCode", nullable = false)
-    private String postalcode;
+    private String postalCode;
 
     @Column(name ="gender", nullable = false)
     private String gender;
 
-    @Column(name ="lname", nullable = false)
-    private String  lname;
+    @Column(name ="lastname", nullable = false)
+    private String  lastName;
 
     @Column(name ="age", nullable = false)
     private int age;
@@ -43,28 +46,12 @@ public class UserData {
     @Column(name ="email", nullable = false)
     private String email;
 
-    public String getFname() {
-        return fname;
+    public int getId() {
+        return id;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
@@ -75,29 +62,44 @@ public class UserData {
         this.password = password;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getAddress() {
         return address;
     }
 
-    public String getCity(){ return city;}
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getPostalcode() {
-        return postalcode;
+    public String getCity() {
+        return city;
     }
 
-    public void setPostalcode(String postalcode) {
-        this.postalcode = postalcode;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public int getAge() {
-        return age;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getGender() {
@@ -108,6 +110,22 @@ public class UserData {
         this.gender = gender;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -115,6 +133,4 @@ public class UserData {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public void setCity(String city) {this.city = city;}
 }

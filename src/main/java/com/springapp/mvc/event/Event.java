@@ -47,7 +47,7 @@ public class Event {
     private int capacity;
 
     @Column(name = "Description", nullable = false)
-    private String Description;
+    private String description;
 
     public int getId() {
         return id;
@@ -138,10 +138,10 @@ public class Event {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 }

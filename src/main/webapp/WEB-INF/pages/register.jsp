@@ -11,10 +11,14 @@
 <head>
   <title>CSS Registration Form</title>
   <style>
+    @font-face{
+      font-family: trench;
+      src: url('css/Junction-light.otf') format('opentype');
+    }
   body {
     color: #fff;
-    font-family: Arial;
-    font-size: 12px;
+    font-family: sans-serif;
+    font-size: 16px;
     background-image: url(http://www.soccer.com/guide/wp-content/uploads/2013/10/HO13_FB_CR7_Athlete.jpg);
     background-size: cover;
     }

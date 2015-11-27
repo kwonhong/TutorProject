@@ -42,8 +42,7 @@ public class DashBoardController {
     }
 
     @RequestMapping(value = "/eventCreateSubmit", method = RequestMethod.POST)
-    public String submitEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") SoccerEvent soccerEvent) {
-        System.out.println(soccerEvent.getTitle());
+    public String submitEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Event soccerEvent) {
         return "dashBoard";
     }
 

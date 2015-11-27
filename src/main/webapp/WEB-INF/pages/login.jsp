@@ -30,7 +30,7 @@ g/
             background: #fff;
 
             color: #fff;
-            font-family: Arial;
+            font-family: 'Exo';
             font-size: 12px;
         }
 
@@ -43,6 +43,9 @@ g/
             width: auto;
             height: auto;
             background-image: url(http://mississauga.sportsxpress.ca/wp-content/uploads/sites/15/2014/12/Soccer-wallpaper1418921001.jpg);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
             -webkit-filter: blur(1px);
             z-index: 0;
@@ -72,12 +75,12 @@ g/
             float: left;
             color: #fff;
             font-family: 'Exo', sans-serif;
-            font-size: 35px;
-            font-weight: 200;
+            font-size: 48px;
+            font-weight: 300;
         }
 
         .header div span{
-            color: #5379fa !important;
+            color: #db0a34 !important;
         }
 
         .login{

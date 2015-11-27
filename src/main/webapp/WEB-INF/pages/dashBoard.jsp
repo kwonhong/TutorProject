@@ -21,7 +21,17 @@ Dashboard
 <hr>
 
 <c:forEach var="event" items="${eventList}" >
+    <table>
     <span>${event.name}</span>
+        <tr>
+            <td>Currently Attending: ${event.numParticipants}</td>
+        </tr>
+        <tr>
+            <td>Spots Available: ${event.capacity - event.numParticipants}</td>
+        </tr>
+    <td><form action="confirmation" method="POST"><input type="hidden" name="tempId" value="${event.getId()}"/>
+    <input type = "submit" name = "rsvp"/></form></td>
+        </table>
 </c:forEach>
 
 <%--<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>--%>

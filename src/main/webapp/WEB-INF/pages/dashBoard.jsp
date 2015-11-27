@@ -7,22 +7,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
-    <%-- Css Plugins--%>
-    <link href='<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />' rel="stylesheet">
-    <link href='<c:url value="/resources/dist/css/sb-admin-2.css" />' rel="stylesheet">
-    <link href='<c:url value="/resources/bower_components/font-awesome/css/font-awesome.min.css"/>' rel="stylesheet"
-          type="text/css"/>
+    <title>Events near you</title>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+        body{
+            margin: 0;
+            padding: 0;
+            background-image: url(http://asummerwasting.org/p/soccer.fields.night-2006.jpg);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Exo';
+            font-size: 12px;
+        }
 
+    </style>
 
 </head>
 <body>
-Dashboard
+Events near you
 <hr>
 
 <c:forEach var="event" items="${eventList}" >
     <table>
-    <span>${event.name}</span>
+    <span><p style ="font-size:20px" style="font-weight:bold"><c style="color:lawngreen">${event.name}</c></p></span>
         <tr>
             <td>Currently Attending: ${event.numParticipants}</td>
         </tr>

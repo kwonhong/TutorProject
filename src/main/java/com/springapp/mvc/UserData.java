@@ -31,7 +31,7 @@ public class UserData {
     @Column(name ="city", nullable = false)
     private String city;
 
-    @Column(name ="postalCode", nullable = false)
+    @Column(name ="postalCode", nullable = true)
     private String postalCode;
 
     @Column(name ="gender", nullable = false)
@@ -46,32 +46,34 @@ public class UserData {
     @Column(name ="email", nullable = false)
     private String email;
 
-    public double getGeolat() {
-        return geolat;
-    }
-
-    public void setGeolat(double geolat) {
-        this.geolat = geolat;
-    }
-
-    public double getGeolon() {
-        return geolon;
-    }
-
-    public void setGeolon(double geolon) {
-        this.geolon = geolon;
-    }
-
     @Column(name ="geolat", nullable = true)
     private double geolat;
 
     @Column(name ="geolon", nullable = true)
     private double geolon;
 
+    @Column(name ="country", nullable = false)
+    private String country;
+
+
+    public String getCountry() {return country;}
+    public void setCountry(String country) {this.country = country;}
+
+    public double getGeolat() {
+        return geolat;
+    }
+    public void setGeolat(double geolat) {this.geolat = geolat;}
+
+    public double getGeolon() {
+        return geolon;
+    }
+    public void setGeolon(double geolon) {
+        this.geolon = geolon;
+    }
+
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -79,7 +81,6 @@ public class UserData {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -87,7 +88,6 @@ public class UserData {
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -95,7 +95,6 @@ public class UserData {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -103,7 +102,6 @@ public class UserData {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -111,7 +109,6 @@ public class UserData {
     public String getCity() {
         return city;
     }
-
     public void setCity(String city) {
         this.city = city;
     }
@@ -119,7 +116,6 @@ public class UserData {
     public String getPostalCode() {
         return postalCode;
     }
-
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
@@ -127,7 +123,6 @@ public class UserData {
     public String getGender() {
         return gender;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -135,7 +130,6 @@ public class UserData {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -143,7 +137,6 @@ public class UserData {
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -151,7 +144,6 @@ public class UserData {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }

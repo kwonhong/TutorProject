@@ -28,6 +28,9 @@
 </head>
 <body>
 Events near you
+    <form role="form" method="POST" >
+        <button type="submit" class="btn btn-lg btn-success btn-block" onclick="form.action='logout'">Log Out</button>
+    </form>
 <hr>
 
 <c:forEach var="event" items="${eventList}" >

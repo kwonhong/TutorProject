@@ -185,7 +185,7 @@ g/
     <form role="form" method="POST" >
         <fieldset>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="E-mail" name="email" type="email" value="">
+                <input class="form-control" type="text" placeholder="E-mail" name="id" type="email" value="">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password"placeholder="Password" name="password" type="password"

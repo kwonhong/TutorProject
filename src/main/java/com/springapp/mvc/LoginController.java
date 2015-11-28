@@ -11,6 +11,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,35 +19,48 @@ import java.util.stream.Collectors;
 @Controller
 public class LoginController {
 
+    public static ServletRequestAttributes attr;
+    public static HttpSession session;
     // private static final String DEFAULT_EMAIL = "email@email.com";
     //private static final String DEFAULT_PASSWORD = "password";
 
     @Autowired
     private UserDao userDao;
 
+
+
     @RequestMapping(method = RequestMethod.GET)
     public String defaultPage(ModelMap model) {
+
+        attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        session = attr.getRequest().getSession();
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, @ModelAttribute("SpringWeb") LoginData loginData) {
-        String email = loginData.getEmail();
+
+
+        String id = loginData.getId();
         String password = loginData.getPassword();
 
         List<UserData> userDataList = userDao.findAllLoginData();
-        List<UserData> foundUsers = userDataList.stream()
-                .filter(userData -> userData.getEmail().equals(email) && userData.getPassword().equals(password))
+        List<UserData> foundUsers1 = userDataList.stream()
+                .filter(userData -> userData.getEmail().equals(id) && userData.getPassword().equals(password))
                 .collect(Collectors.toList());
+        List<UserData> foundUsers2 = userDataList.stream().filter(userData -> userData.
+                getUserName().equals(id) && userData.getPassword().equals(password)).collect(Collectors.toList());
 
-        if (foundUsers.isEmpty()) {
-            return "login";
-        } else {
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession();
-            session.setAttribute("userID", foundUsers.get(0).getId());
+        if (!foundUsers1.isEmpty() && foundUsers2.isEmpty()) {
+            session.setAttribute("userID", foundUsers1.get(0).getId());
             return "redirect:/dashBoard";
         }
+        if (foundUsers1.isEmpty() && !foundUsers2.isEmpty()){
+            session.setAttribute("userID", foundUsers2.get(0).getId());
+            return "redirect:/dashBoard";
+        }
+        return "login";
+
     }
 
     private boolean isValidLoginData(String identification, String password) throws SQLException {
@@ -72,7 +86,23 @@ public class LoginController {
 
     @RequestMapping(value = "/registerSubmit", method = {RequestMethod.POST})
     public String registerUser(ModelMap modelMap, @ModelAttribute("SpringWeb") UserData userData) throws SQLException {
-        //TODO Check fields
+        String a = userData.getAddress();
+        String b = userData.getCity();
+        String c = userData.getCountry();
+        String d = userData.getPostalCode();
+        double lat = 0;
+        double lon = 0;
+
+        String address = a + "," + b + "," + c +". " +d;
+        GeocodingApi Geocode = new GeocodingApi();
+        try {
+            lat = Geocode.getLatitude(address);
+            lon = Geocode.getLongitude(address);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        userData.setGeolat(lat);
+        userData.setGeolon(lon);
 
         userDao.createUser(userData);
 

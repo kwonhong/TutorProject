@@ -1,12 +1,9 @@
 package com.springapp.mvc;
 
-/**
- * Created by honkwon on 15-10-04.
- */
+
 public class LoginData {
 
     private String id;
-    private String email;
     private String password;
 
 
@@ -18,18 +15,8 @@ public class LoginData {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {return password;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }

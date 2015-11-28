@@ -14,9 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-/**
- * Created by honkwon on 15-10-12.
- */
+
 
 @Controller
 public class DashBoardController {
@@ -26,12 +24,16 @@ public class DashBoardController {
 
     @RequestMapping(value = "/dashBoard", method = RequestMethod.GET)
     public String defaultPage(ModelMap model) {
+        HttpSession current = LoginController.session;
+
+        if((current.getAttribute("userID") == null)) return "login";
+
+
         List<Event> eventList = eventDao.findAllEvents();
         model.addAttribute("eventList", eventList);
 
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession();
-        int userID = (int) session.getAttribute("userID");
+
+
         return "dashBoard";
     }
 
@@ -46,4 +48,12 @@ public class DashBoardController {
         return "dashBoard";
     }
 
+    @RequestMapping(value ="/logout", method = {RequestMethod.GET, RequestMethod.POST})
+    public String logOut (ModelMap modelMap){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        session.invalidate();
+
+        return "login";
+    }
 }

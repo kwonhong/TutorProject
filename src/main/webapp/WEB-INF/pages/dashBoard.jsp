@@ -32,7 +32,7 @@ Events near you
 
 <c:forEach var="event" items="${eventList}" >
     <table>
-    <span><p style ="font-size:20px" style="font-weight:bold"><c style="color:lawngreen">${event.name}</c></p></span>
+    <span><p style ="font-size:20px" style="font-weight:bold"> <c style="color:lawngreen">${event.name}</c></p></span>
         <tr>
             <td>Currently Attending: ${event.numParticipants}</td>
         </tr>
@@ -40,7 +40,7 @@ Events near you
             <td>Spots Available: ${event.capacity - event.numParticipants}</td>
         </tr>
     <td><form action="confirmation" method="POST"><input type="hidden" name="tempId" value="${event.getId()}"/>
-    <input type = "submit" name = "rsvp"/></form></td>
+    <input type = "submit" name = "rsvp" value="RSVP" /></form></td>
         </table>
 </c:forEach>
 

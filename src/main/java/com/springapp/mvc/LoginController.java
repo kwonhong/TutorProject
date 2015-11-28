@@ -31,7 +31,6 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, @ModelAttribute("SpringWeb") LoginData loginData) {
-
         String email = loginData.getEmail();
         String password = loginData.getPassword();
 

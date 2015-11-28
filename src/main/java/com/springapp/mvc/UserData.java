@@ -46,6 +46,28 @@ public class UserData {
     @Column(name ="email", nullable = false)
     private String email;
 
+    public double getGeolat() {
+        return geolat;
+    }
+
+    public void setGeolat(double geolat) {
+        this.geolat = geolat;
+    }
+
+    public double getGeolon() {
+        return geolon;
+    }
+
+    public void setGeolon(double geolon) {
+        this.geolon = geolon;
+    }
+
+    @Column(name ="geolat", nullable = true)
+    private double geolat;
+
+    @Column(name ="geolon", nullable = true)
+    private double geolon;
+
     public int getId() {
         return id;
     }

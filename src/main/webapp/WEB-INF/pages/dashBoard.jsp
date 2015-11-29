@@ -13,7 +13,7 @@
         body{
             margin: 0;
             padding: 0;
-            background-image: url(http://asummerwasting.org/p/soccer.fields.night-2006.jpg);
+            background-image: url(http://i.imgur.com/4a2H5lF.jpg);
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

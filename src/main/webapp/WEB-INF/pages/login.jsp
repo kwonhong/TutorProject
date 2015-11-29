@@ -42,7 +42,7 @@ g/
             bottom: -40px;
             width: auto;
             height: auto;
-            background-image: url(http://mississauga.sportsxpress.ca/wp-content/uploads/sites/15/2014/12/Soccer-wallpaper1418921001.jpg);
+            background-image: url(http://i.imgur.com/0TOwuXJ.jpg);
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

@@ -19,7 +19,7 @@
     color: #fff;
     font-family: sans-serif;
     font-size: 16px;
-    background-image: url(http://www.soccer.com/guide/wp-content/uploads/2013/10/HO13_FB_CR7_Athlete.jpg);
+    background-image: url(http://i.imgur.com/6AkCBJa.jpg);
     background-size: cover;
     }
   </style>
@@ -43,9 +43,9 @@
       <input type ="email" name="email" required/>
     </p>
     <p>
-      <label>Password*
+      <label>Password
       </label>
-      <input type="text" name="password" required/>
+      <input type="password" name="password" required/>
     </p>
   </fieldset>
   <fieldset class="row2">
@@ -86,11 +86,11 @@
     <legend>Further Information
     </legend>
     <p>
-      <label>Gender</label>
-      <input type="radio" name = "gender" value="Male"/>
-      <input type="radio" name = "gender" value="Female"/>
+      <label>Gender</label><br>
+        <p>  </p><label>Male <input type="radio" name = "gender" value="Male"/></label>
+       <label>Female <input type="radio" name = "gender" value="Female"/></label>
     </p>
-      <input type="text" name="age"size="4" maxlength="4"/>
+      <label>Age </label><input type="text" name="age"size="4" maxlength="4"/>
     </p>
     <div class="infobox"><h4>Helpful Information</h4>
       <p>Here comes some explaining text, sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>

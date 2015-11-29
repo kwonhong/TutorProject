@@ -98,8 +98,9 @@ public class LoginController {
         try {
             lat = Geocode.getLatitude(address);
             lon = Geocode.getLongitude(address);
-        }catch (IOException ex){
-            ex.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+            return "register";
         }
         userData.setGeolat(lat);
         userData.setGeolon(lon);

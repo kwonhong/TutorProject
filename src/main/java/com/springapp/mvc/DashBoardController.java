@@ -1,8 +1,10 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.dao.EventDao;
+import com.springapp.mvc.dao.ReservationDao;
 import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.event.Event;
+import com.springapp.mvc.event.Reservation;
 import com.springapp.mvc.user.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -26,6 +29,9 @@ public class DashBoardController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ReservationDao reservationDao;
 
     @RequestMapping(value = "/dashBoard", method = RequestMethod.GET)
     public String defaultPage(ModelMap model) {
@@ -56,8 +62,14 @@ public class DashBoardController {
         return "dashBoard";
     }
 
+    @RequestMapping(value = "/eventRsvp", method = RequestMethod.POST)
+    public String rsvpEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation)
+    {
+        reservationDao.createReservation(reservation);
+        return "/dashBoard";
+    }
     @RequestMapping(value ="/logout", method = {RequestMethod.GET, RequestMethod.POST})
-    public String logOut (ModelMap modelMap){
+    public String logoutCompleted (ModelMap modelMap){
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession();
         session.invalidate();

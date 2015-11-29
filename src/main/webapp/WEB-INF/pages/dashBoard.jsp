@@ -44,17 +44,20 @@ Welcome ${currentUser.firstname}
 <hr>
 
 <c:forEach var="event" items="${eventList}" >
-    <table>
-    <span><p style ="font-size:20px" style="font-weight:bold"> <c style="color:lawngreen">${event.name}</c></p></span>
-        <tr>
-            <td>Currently Attending: ${event.numParticipants}</td>
-        </tr>
-        <tr>
-            <td>Spots Available: ${event.capacity - event.numParticipants}</td>
-        </tr>
-    <td><form action="confirmation" method="POST"><input type="hidden" name="tempId" value="${event.getId()}"/>
-    <input type = "submit" name = "rsvp" value="RSVP" /></form></td>
+    <form role = "eventReservation" method="POST">
+        <table>
+        <span><p style ="font-size:20px" style="font-weight:bold"> <c style="color:lawngreen">${event.name}</c></p></span>
+            <tr>
+                <td>Currently Attending: ${event.numParticipants}</td>
+            </tr>
+            <tr>
+                <td>Spots Available: ${event.capacity - event.numParticipants}</td>
+            </tr>
+                 <td><input type="hidden" name="userid" value="${current.id}"/>
+                     <input type="hidden" name="eventid" value="${event.id}"/>
+                    <input type = "submit" name = "submit" value="RSVP" onclick="form.action='eventRsvp'"/></td>
         </table>
+    </form>
 </c:forEach>
 
 <%--<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>--%>

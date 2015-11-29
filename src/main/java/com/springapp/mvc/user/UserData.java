@@ -1,4 +1,4 @@
-package com.springapp.mvc;
+package com.springapp.mvc.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

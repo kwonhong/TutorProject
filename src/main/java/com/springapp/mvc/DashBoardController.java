@@ -3,6 +3,7 @@ package com.springapp.mvc;
 import com.springapp.mvc.dao.EventDao;
 import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.event.Event;
+import com.springapp.mvc.user.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

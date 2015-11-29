@@ -36,7 +36,7 @@
 
 </head>
 <body>
-Welcome ${currentUser.firstName}
+Welcome ${currentUser.firstname}
 <br>${currentUser.city}
     <form role = "logout" method="POST" >
         <button class = "asText" onclick="form.action='logout'">Log Out </button>

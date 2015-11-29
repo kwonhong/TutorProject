@@ -1,6 +1,8 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.dao.UserDao;
+import com.springapp.mvc.function.GeocodingApi;
+import com.springapp.mvc.user.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;

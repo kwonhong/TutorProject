@@ -25,7 +25,7 @@ public class Event {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "postalCode", nullable = false)
+    @Column(name = "postalCode", nullable = true)
     private String postalCode;
 
     @Column(name = "gender", nullable = false)
@@ -34,20 +34,23 @@ public class Event {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "minimumAge", nullable = false)
+    @Column(name = "minimumAge", nullable = true)
     private int minimumAge;
 
-    @Column(name = "maximumAge", nullable = false)
+    @Column(name = "maximumAge", nullable = true)
     private int maximumAge;
 
-    @Column(name = "numParticipants", nullable = false)
+    @Column(name = "numParticipants", nullable = true)
     private int numParticipants;
 
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    @Column(name = "Description", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "country", nullable = true)
+    private String country;
 
     public int getId() {
         return id;
@@ -137,11 +140,13 @@ public class Event {
         this.capacity = capacity;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description;}
 
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getCountry() {return country;}
+
+    public void setCountry(String country) {this.country = country;}
 }

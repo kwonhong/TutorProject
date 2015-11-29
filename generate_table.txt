@@ -1,48 +1,56 @@
-CREATE DATABASE footyFixDatabase;
+CREATE DATABASE IF NOT EXISTS footyfixdatabase;
 
+USE footyfixdatabase;
 CREATE TABLE IF NOT EXISTS userdata (
 id INT auto_increment,
 username TEXT NOT NULL,
-Password TEXT NOT NULL,
-FirstName TEXT,
-LastName TEXT,
-Address TEXT,
-City TEXT,
-Email TEXT,
-PostalCode TEXT,
-Age int,
-Gender TEXT,
+password TEXT NOT NULL,
+firstname TEXT,
+lastname TEXT,
+address TEXT,
+city TEXT,
+country TEXT,
+email TEXT,
+postalcode TEXT,
+age int,
+gender TEXT,
+geolat DOUBLE,
+geolon DOUBLE,
 PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS event (
 id INT auto_increment,
-Name TEXT,
-Address TEXT,
-City TEXT,
-PostalCode TEXT,
-Type TEXT,
-Gender TEXT,
-Date date,
+name TEXT,
+address TEXT,
+city TEXT,
+country TEXT,
+postalcode TEXT,
+type TEXT,
+gender TEXT,
+date date,
 minimumAge int,
 maximumAge int,
-numParticipants int,
-Capacity int,
-Description TEXT,
+numParticipants int DEFAULT 0,
+capacity int,
+description TEXT,
+geolat DOUBLE,
+geolon DOUBLE,
 PRIMARY KEY (id)
 );
 
-INSERT INTO user VALUES('user1', '1234', 'Tom', 'Smith', '23 Hollywood Avenue', 'Toronto', 'user1@gmail.com', 'M2N 7L8', 22, 'Male');
-INSERT INTO user VALUES('user2', '0000', 'Tim', 'Schmit', '20 College Street', 'Toronto', 'user2@gmail.com', 'M5G 1K2', 25, 'Male');
-INSERT INTO user VALUES('user3', 'user3password', 'Jenna', 'Ferguson', '252 Queen ST W', 'Toronto', 'user3@gmail.com', 'M5V 1Z8', 34, 'Female');
-INSERT INTO user VALUES('alex08', 'password', 'Alex', 'Choi', '2181 Yonge Street', 'Toronto', 'alex08@gmail.com', 'M4S 3H8', 17, 'Male');
-INSERT INTO user VALUES('tlqkfsha', 'rotlqkf', 'Tom', 'Cruise', '250 Sheppard Avenue West', 'Toronto', 'tomcruise@gmail.com', 'M2N 1N3', 53, 'Male');
-INSERT INTO user VALUES('byungshin', '1234', 'SeongYell', 'Lee', '386 Yonge Street', 'Toronto', 'sele06@gmail.com', 'M5B 0A5', 23, 'Male');
-INSERT INTO user VALUES('latte', 'rnldyal', 'Latte', 'Kim', '55 Bloor St East', 'Toronto', 'latte@gmail.com', 'M4W 3W6', 1, 'Male');
+
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user1', '1234', 'Tom', 'Smith', '23 Hollywood Avenue', 'Toronto', 'Canada',  'M2N 7L8', 22, 'Male','user1@gmail.com',43.7056,-79.3980);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user2', '0000', 'Tim', 'Schmit', '20 College Street', 'Toronto', 'Canada', 'M5G 1K2', 25, 'Male','user2@gmail.com',43.83874,-79.2734851);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user3', 'user3password', 'Jenna', 'Ferguson', '252 Queen ST W', 'Toronto', 'Canada', 'M5V 1Z8', 34, 'Female','user3@gmail.com',43.2859,-79.19212);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('alex08', 'password', 'Alex', 'Choi', '2181 Yonge Street', 'Toronto', 'Canada', 'M4S 3H8', 17, 'Male','alex08@gmail.com',43.562124,-79.39842);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('tlqkfsha', 'rotlqkf', 'Tom', 'Cruise', '250 Sheppard Avenue West', 'Toronto', 'Canada', 'M2N 1N3', 53, 'Male','tomcruise@gmail.com',42.9582,-78.1253);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('byungshin', '1234', 'SeongYell', 'Lee', '386 Yonge Street', 'Toronto', 'Canada', 'M5B 0A5', 23, 'Male','sele06@gmail.com',44.56321,-79.25235);
+INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('latte', 'rnldyal', 'Latte', 'Kim', '55 Bloor St East', 'Toronto', 'Canada', 'M4W 3W6', 1, 'Male','latte@gmail.com',44.67990,-79.3999);
 
 
-INSERT INTO event VALUES('1447546541810', 'Trinity Square', '19 Trinity Square', 'Toronto', 'M5G 1B1', 'Full', 'Mixed', '2015-12-03', '19:30:00', 23, 29, 0, 22, 'Young Adult Game at Trinity Square. Starts at 7:30 in the evening');
-INSERT INTO event VALUES('1447545241810', 'Claude Watson School Field', '130 Doris Avenue', 'Toronto', 'M2N 0A8', 'Full', 'Guys', '2015-12-05', '17:30:00', 30, 50, 0, 22, '30 to 50 Year Old Guys Only Game at Claude Watson Turf. Start at 5:30 pm');
-INSERT INTO event VALUES('1447599541810', 'Eglington Flats', '101 Emmett Ave', 'Toronto', 'M6M 2E5', 'Full', 'Guys', '2015-12-06', '19:00:00', 18, 25, 0, 22, 'Student Game at Eglington Flats.');
-INSERT INTO event VALUES('144957641810', 'North York Civic Soccer Fields', '', 'Toronto', 'M2R 1N7', 'Half', 'Girls', '2015-12-06', '19:30:00', 19, 99, 0, 10, 'All Age Girls Game at one of North York Civic Centre's soccer fields!');
-INSERT INTO event VALUES('1542546541810', 'Sunnybrook Park', '1132 Leslie St', 'Toronto', '', 'Half', 'Mixed', '2015-12-12', '13:30:00', 55, 99, 0, 10, 'Seniors Half Game at Sunnybrooks.');
+INSERT INTO event (name,address,city,country,postalcode,type,gender,date,minimumAge,maximumAge,capacity,description,geolat,geolon) VALUES('Trinity Square', '19 Trinity Square', 'Toronto', 'Canada','M5G 1B1', 'Full', 'Mixed', '2015-12-03', 23, 29, 22, 'Young Adult Game at Trinity Square. Starts at 7:30 in the evening',41.5342134,-77.21324);
+INSERT INTO event (name,address,city,country,postalcode,type,gender,date,minimumAge,maximumAge,capacity,description,geolat,geolon) VALUES('Claude Watson School Field', '130 Doris Avenue','Toronto', 'Canada','M2N 0A8', 'Full', 'Guys', '2015-12-05', 30, 50,  22, '30 to 50 Year Old Guys Only Game at Claude Watson Turf. Start at 5:30 pm',44.213231,-79.45435);
+INSERT INTO event (name,address,city,country,postalcode,type,gender,date,minimumAge,maximumAge,capacity,description,geolat,geolon) VALUES('Eglington Flats', '101 Emmett Ave', 'Toronto', 'Canada','M6M 2E5', 'Full', 'Guys', '2015-12-06', 18, 25, 022, 'Student Game at Eglington Flats.',43.231245,-79.123124);
+INSERT INTO event (name,address,city,country,postalcode,type,gender,date,minimumAge,maximumAge,capacity,description,geolat,geolon) VALUES('North York Civic Soccer Fields', '', 'Toronto', 'Canada','M2R 1N7', 'Half', 'Girls', '2015-12-06', 19, 99,  10, 'All Age Girls Game at one of North York Civic Centre''s soccer fields!',43.2958,-79.3980);
+INSERT INTO event (name,address,city,country,type,gender,date,minimumAge,maximumAge,capacity,description,geolat,geolon) VALUES('Sunnybrook Park', '1132 Leslie St', 'Toronto','Canada', 'Half', 'Mixed', '2015-12-12', 55, 99,  10, 'Seniors Half Game at Sunnybrooks.',43.83845,-79.25342112);

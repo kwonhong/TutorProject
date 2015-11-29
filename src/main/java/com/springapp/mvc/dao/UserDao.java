@@ -1,6 +1,6 @@
 package com.springapp.mvc.dao;
 
-import com.springapp.mvc.UserData;
+import com.springapp.mvc.user.UserData;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;

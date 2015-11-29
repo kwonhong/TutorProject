@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.dao.EventDao;
+import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,16 +23,22 @@ public class DashBoardController {
     @Autowired
     private EventDao eventDao;
 
+    @Autowired
+    private UserDao userDao;
+
     @RequestMapping(value = "/dashBoard", method = RequestMethod.GET)
     public String defaultPage(ModelMap model) {
         HttpSession current = LoginController.session;
 
         if((current.getAttribute("userID") == null)) return "login";
 
+        int id = (int) current.getAttribute("userID");
 
+        UserData currentUser = userDao.findUserById(id);
         List<Event> eventList = eventDao.findAllEvents();
-        model.addAttribute("eventList", eventList);
 
+        model.addAttribute("eventList", eventList);
+        model.addAttribute("currentUser", currentUser);
 
 
         return "dashBoard";

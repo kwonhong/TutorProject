@@ -2,6 +2,7 @@ package com.springapp.mvc.dao;
 
 import com.springapp.mvc.UserData;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,12 @@ public class UserDao extends AbstractDao {
 
     public void createUser(UserData userData) {
         persist(userData);
+    }
+
+    public UserData findUserById(int userID) {
+        Criteria criteria = getSession().createCriteria(UserData.class);
+        criteria.add(Restrictions.eq("id", userID));
+        return (UserData) criteria.uniqueResult();
     }
 
 }

@@ -7,7 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Events near you</title>
+    <title>FootyFix Events Page</title>
     <style>
         @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
         body{
@@ -22,14 +22,24 @@
             font-family: 'Exo';
             font-size: 12px;
         }
-
+        .asText {
+            background:none;
+            border:none;
+            margin:0;
+            padding:0;
+            color: #fff;
+            font-family: 'Exo';
+            font-size: 15px;
+            font-weight: bold;
+        }
     </style>
 
 </head>
 <body>
-Events near you
-    <form role="form" method="POST" >
-        <button type="submit" class="btn btn-lg btn-success btn-block" onclick="form.action='logout'">Log Out</button>
+Welcome ${currentUser.firstName}
+<br>${currentUser.city}
+    <form role = "logout" method="POST" >
+        <button class = "asText" onclick="form.action='logout'">Log Out </button>
     </form>
 <hr>
 

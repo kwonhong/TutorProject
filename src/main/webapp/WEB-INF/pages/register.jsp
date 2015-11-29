@@ -27,189 +27,70 @@
   <link rel="stylesheet" type="text/css" href="css/default.css"/>
 </head>
 <body>
-<form action="" class="register">
+<form role="create new user" method="POST">
   <h1>Registration</h1>
   <fieldset class="row1">
     <legend>Account Details
     </legend>
     <p>
-      <label>Email *
+      <label>User Name
       </label>
-      <input name ="email" type="text"/>
-      <label>Repeat email *
+      <input type ="text" name="username" required/>
+    </p>
+    <p>
+      <label>E-mail
       </label>
-      <input type="text"/>
+      <input type ="email" name="email" required/>
     </p>
     <p>
       <label>Password*
       </label>
-      <input type="text"/>
-      <label>Repeat Password*
-      </label>
-      <input type="text"/>
-      <label class="obinfo">* obligatory fields
-      </label>
+      <input type="text" name="password" required/>
     </p>
   </fieldset>
   <fieldset class="row2">
     <legend>Personal Details
     </legend>
     <p>
-      <label>Name *
+      <label>First Name
       </label>
-      <input type="text" class="long"/>
+      <input type="text" class="long" name = "firstname"/>
     </p>
     <p>
-      <label>Phone *
+      <label>Last Name
       </label>
-      <input type="text" maxlength="10"/>
+      <input type="text" class="long"name = "lastname"/>
     </p>
     <p>
       <label class="optional">Street
       </label>
-      <input type="text" class="long"/>
+      <input type="text" class="long" name = "address"/>
     </p>
     <p>
-      <label>City *
+      <label>City
       </label>
-      <input type="text" class="long"/>
+      <input type="text" class="long" name = "city"/>
     </p>
     <p>
-      <label>Country *
+      <label>Country
       </label>
-      <select>
-        <option>
-        </option>
-        <option value="1">United States
-        </option>
-      </select>
+      <input type="text" class="long" name = "country"/>
     </p>
     <p>
-      <label class="optional">Website
+      <label>Postal Code
       </label>
-      <input class="long" type="text" value="http://"/>
-
+      <input type="text" class="long" name = "postalcode" maxlength = "7"/>
     </p>
   </fieldset>
   <fieldset class="row3">
     <legend>Further Information
     </legend>
     <p>
-      <label>Gender *</label>
-      <input type="radio" value="radio"/>
-      <label class="gender">Male</label>
-      <input type="radio" value="radio"/>
-      <label class="gender">Female</label>
+      <label>Gender</label>
+      <input type="radio" name = "gender" value="Male"/>
+      <input type="radio" name = "gender" value="Female"/>
     </p>
-    <p>
-      <label>Birthdate *
-      </label>
-      <select class="date">
-        <option value="1">01
-        </option>
-        <option value="2">02
-        </option>
-        <option value="3">03
-        </option>
-        <option value="4">04
-        </option>
-        <option value="5">05
-        </option>
-        <option value="6">06
-        </option>
-        <option value="7">07
-        </option>
-        <option value="8">08
-        </option>
-        <option value="9">09
-        </option>
-        <option value="10">10
-        </option>
-        <option value="11">11
-        </option>
-        <option value="12">12
-        </option>
-        <option value="13">13
-        </option>
-        <option value="14">14
-        </option>
-        <option value="15">15
-        </option>
-        <option value="16">16
-        </option>
-        <option value="17">17
-        </option>
-        <option value="18">18
-        </option>
-        <option value="19">19
-        </option>
-        <option value="20">20
-        </option>
-        <option value="21">21
-        </option>
-        <option value="22">22
-        </option>
-        <option value="23">23
-        </option>
-        <option value="24">24
-        </option>
-        <option value="25">25
-        </option>
-        <option value="26">26
-        </option>
-        <option value="27">27
-        </option>
-        <option value="28">28
-        </option>
-        <option value="29">29
-        </option>
-        <option value="30">30
-        </option>
-        <option value="31">31
-        </option>
-      </select>
-      <select>
-        <option value="1">January
-        </option>
-        <option value="2">February
-        </option>
-        <option value="3">March
-        </option>
-        <option value="4">April
-        </option>
-        <option value="5">May
-        </option>
-        <option value="6">June
-        </option>
-        <option value="7">July
-        </option>
-        <option value="8">August
-        </option>
-        <option value="9">September
-        </option>
-        <option value="10">October
-        </option>
-        <option value="11">November
-        </option>
-        <option value="12">December
-        </option>
-      </select>
-      <input class="year" type="text" size="4" maxlength="4"/>e.g 1976
-    </p>
-    <p>
-      <label>Nationality *
-      </label>
-      <select>
-        <option value="0">
-        </option>
-        <option value="1">United States
-        </option>
-      </select>
-    </p>
-    <p>
-      <label>Children *
-      </label>
-      <input type="checkbox" value="" />
+      <input type="text" name="age"size="4" maxlength="4"/>
     </p>
     <div class="infobox"><h4>Helpful Information</h4>
       <p>Here comes some explaining text, sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
@@ -219,8 +100,8 @@
     <legend>Terms and Mailing
     </legend>
     <p class="agreement">
-      <input type="checkbox" value=""/>
-      <label>*  I accept the <a href="#">Terms and Conditions</a></label>
+      <input type="checkbox" value="" required/>
+      <label>I accept the <a href="terms">Terms and Conditions</a></label>
     </p>
     <p class="agreement">
       <input type="checkbox" value=""/>

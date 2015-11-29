@@ -20,10 +20,10 @@ public class UserData {
     private String password;
 
     @Column(name = "userName", nullable = false)
-    private String userName;
+    private String username;
 
     @Column(name ="firstname", nullable = false)
-    private String firstName;
+    private String firstname;
 
     @Column(name ="address", nullable = false)
     private String address;
@@ -32,13 +32,13 @@ public class UserData {
     private String city;
 
     @Column(name ="postalCode", nullable = true)
-    private String postalCode;
+    private String postalcode;
 
     @Column(name ="gender", nullable = false)
     private String gender;
 
     @Column(name ="lastname", nullable = false)
-    private String  lastName;
+    private String  lastname;
 
     @Column(name ="age", nullable = false)
     private int age;
@@ -81,22 +81,20 @@ public class UserData {
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) {this.password = password;}
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFirstname() {
+        return firstname;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstName) {
+        this.firstname = firstName;
     }
 
     public String getAddress() {
@@ -113,11 +111,11 @@ public class UserData {
         this.city = city;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public String getPostalcode() {
+        return postalcode;
     }
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public void setPostalcode(String postalcode) {
+        this.postalcode = postalcode;
     }
 
     public String getGender() {
@@ -127,11 +125,11 @@ public class UserData {
         this.gender = gender;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public int getAge() {

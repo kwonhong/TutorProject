@@ -49,7 +49,7 @@ public class LoginController {
                 .filter(userData -> userData.getEmail().equals(id) && userData.getPassword().equals(password))
                 .collect(Collectors.toList());
         List<UserData> foundUsers2 = userDataList.stream().filter(userData -> userData.
-                getUserName().equals(id) && userData.getPassword().equals(password)).collect(Collectors.toList());
+                getUsername().equals(id) && userData.getPassword().equals(password)).collect(Collectors.toList());
 
         if (!foundUsers1.isEmpty() && foundUsers2.isEmpty()) {
             session.setAttribute("userID", foundUsers1.get(0).getId());
@@ -89,7 +89,7 @@ public class LoginController {
         String a = userData.getAddress();
         String b = userData.getCity();
         String c = userData.getCountry();
-        String d = userData.getPostalCode();
+        String d = userData.getPostalcode();
         double lat = 0;
         double lon = 0;
 

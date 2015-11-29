@@ -13,15 +13,11 @@ import java.util.List;
 @Transactional
 public class ReservationDao extends AbstractDao {
 
-    public List<Reservation> findAllReservations() {
-        return getSession().createCriteria(Reservation.class).list();
-    }
-
     public void createReservation(Reservation reservation) {
         persist(reservation);
     }
 
-    public List<Reservation> findReservation(int userid) {
+    public List<Reservation> findReservations(int userid) {
         Criteria criteria = getSession().createCriteria(Reservation.class);
         criteria.add(Restrictions.eq("userid", userid));
         List <Reservation> reservations = criteria.list();

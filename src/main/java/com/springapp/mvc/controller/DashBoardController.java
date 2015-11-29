@@ -1,4 +1,4 @@
-package com.springapp.mvc;
+package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dao.EventDao;
 import com.springapp.mvc.dao.ReservationDao;
@@ -17,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,7 +43,19 @@ public class DashBoardController {
         int id = (int) current.getAttribute("userID");
 
         UserData currentUser = userDao.findUserById(id);
-        List<Event> eventList = eventDao.findAllEvents();
+        List<Reservation> reservationList = reservationDao.findReservations(id);
+        ArrayList<Integer> filter = new ArrayList<Integer>();
+
+        for (Reservation r: reservationList) {
+            filter.add(r.getEventid());
+            System.out.println(r);
+        }
+
+
+        List<Event> eventList = eventDao.findAllEvents(id, filter);
+
+        for (Event event : eventList)
+        System.out.println("Event ids" +event.getId());
 
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
@@ -63,11 +76,11 @@ public class DashBoardController {
     }
 
     @RequestMapping(value = "/eventRsvp", method = RequestMethod.POST)
-    public String rsvpEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation)
-    {
+    public String rsvpEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation) throws SQLException {
         reservationDao.createReservation(reservation);
-        return "/dashBoard";
+        return "redirect:/dashBoard";
     }
+
     @RequestMapping(value ="/logout", method = {RequestMethod.GET, RequestMethod.POST})
     public String logoutCompleted (ModelMap modelMap){
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();

@@ -1,22 +1,32 @@
 package com.springapp.mvc.dao;
 
 import com.springapp.mvc.event.Event;
+import com.springapp.mvc.event.Reservation;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.util.*;
+
 
 @Component
 @Transactional
 public class EventDao extends AbstractDao {
 
-    public List<Event> findAllEvents() {
-        return getSession().createCriteria(Event.class).list();
-//        String sqlQuery = "SELECT * from event";
-//        return getSession().createSQLQuery(sqlQuery).list();
+    public List<Event> findAllEvents(int userid, ArrayList<Integer> filter) {
+        Criteria criteria = getSession().createCriteria(Event.class);
+        for (int a : filter){
+            criteria.add(Restrictions.ne("id", a));
+        }
+        List <Event> eventList = criteria.list();
+        return eventList;
     }
 
     public Event findEventById(int eventID) {

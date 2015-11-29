@@ -44,18 +44,19 @@ Welcome ${currentUser.firstname}
 <hr>
 
 <c:forEach var="event" items="${eventList}" >
-    <form role = "eventReservation" method="POST">
+    <form role = "eventReservation" method="POST" name = "${event.id}">
         <table>
         <span><p style ="font-size:20px" style="font-weight:bold"> <c style="color:lawngreen">${event.name}</c></p></span>
             <tr>
-                <td>Currently Attending: ${event.numParticipants}</td>
+                <td>Currently Attending: ${event.getNumParticipants()}</td>
             </tr>
             <tr>
-                <td>Spots Available: ${event.capacity - event.numParticipants}</td>
+                <td>Spots Available: ${event.getCapacity() - event.getNumParticipants()}</td>
             </tr>
-                 <td><input type="hidden" name="userid" value="${current.id}"/>
+                 <td><input type="hidden" name="userid" value="${currentUser.id}"/>
                      <input type="hidden" name="eventid" value="${event.id}"/>
-                    <input type = "submit" name = "submit" value="RSVP" onclick="form.action='eventRsvp'"/></td>
+                     <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+                             onclick="form.action='eventRsvp'">RSVP</button></td>
         </table>
     </form>
 </c:forEach>

@@ -1,5 +1,6 @@
-package com.springapp.mvc;
+package com.springapp.mvc.controller;
 
+import com.springapp.mvc.user.LoginData;
 import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.function.GeocodingApi;
 import com.springapp.mvc.user.UserData;

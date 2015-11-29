@@ -52,10 +52,8 @@ public class DashBoardController {
         }
 
 
-        List<Event> eventList = eventDao.findAllEvents(id, filter);
+        List<Event> eventList = eventDao.findAllEventsNotReserved(filter);
 
-        for (Event event : eventList)
-        System.out.println("Event ids" +event.getId());
 
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
@@ -64,15 +62,6 @@ public class DashBoardController {
         return "dashBoard";
     }
 
-    @RequestMapping(value = "/myPage", method = {RequestMethod.GET,RequestMethod.POST})
-    public String redirectUserPage(ModelMap modelMap){
-        HttpSession current = LoginController.session;
-        int id = (int) current.getAttribute("userID");
-        UserData currentUser = userDao.findUserById(id);
-        modelMap.addAttribute("currentUser", currentUser);
-
-        return "myPage";
-    }
     @RequestMapping(value = "/eventCreate", method = RequestMethod.GET)
     public String redirectEventCreatePage(ModelMap modelMap) {
         System.out.println("C");

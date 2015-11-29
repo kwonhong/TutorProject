@@ -20,7 +20,11 @@ import java.util.*;
 @Transactional
 public class EventDao extends AbstractDao {
 
-    public List<Event> findAllEvents(int userid, ArrayList<Integer> filter) {
+    public List<Event> findAllEvents(){
+        return getSession().createCriteria(Event.class).list();
+    }
+
+    public List<Event> findAllEventsNotReserved(ArrayList<Integer> filter) {
         Criteria criteria = getSession().createCriteria(Event.class);
         for (int a : filter){
             criteria.add(Restrictions.ne("id", a));
@@ -51,6 +55,5 @@ public class EventDao extends AbstractDao {
         Query query = getSession().createSQLQuery("delete from event where id = :id");
         query.setInteger("id", eventID);
         query.executeUpdate();
-
     }
 }

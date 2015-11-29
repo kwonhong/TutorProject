@@ -39,6 +39,10 @@
 Welcome ${currentUser.firstname}
 <br>${currentUser.city}
     <form role = "logout" method="POST" >
+        <button class = "asText" onclick="form.action='myPage'">My Page </button>
+    </form>
+<p>  </p>
+    <form role = "logout" method="POST" >
         <button class = "asText" onclick="form.action='logout'">Log Out </button>
     </form>
 <hr>

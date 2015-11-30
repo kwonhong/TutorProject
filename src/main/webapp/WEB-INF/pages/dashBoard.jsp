@@ -99,14 +99,21 @@
 
 
     <div class="row">
-        <form role="search" action="/search">
             <div class="search">
+                <form role="search" action="/search">
                 <div class="col-lg-6">
-                    <input name="searchText" type="text" class="form-control" placeholder="Search Tutorial">
+                    <input name="searchText" type="text" class="form-control" placeholder="Search Events">
                 </div>
                     <button class="btn btn-default" type="submit">Go!</button>
+                </form>
+                <div class="col-lg-2">
+                    <form role="search near by" action="/searchNear">
+                        <button class="btn btn-default" type="submit">Near Me</button>
+                    </form>
+                </div>
+                </div>
+
             </div>
-        </form>
     </div>
     <h2>Soccer Events</h2>
 

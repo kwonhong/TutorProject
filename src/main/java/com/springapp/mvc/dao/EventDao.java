@@ -2,6 +2,8 @@ package com.springapp.mvc.dao;
 
 import com.springapp.mvc.event.Event;
 import com.springapp.mvc.event.Reservation;
+import com.springapp.mvc.function.FindDistance;
+import com.springapp.mvc.user.UserData;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.util.*;
 
@@ -19,6 +22,9 @@ import java.util.*;
 @Component
 @Transactional
 public class EventDao extends AbstractDao {
+
+    @Autowired
+    private UserDao userDao;
 
     public List<Event> findAllEvents(){
         return getSession().createCriteria(Event.class).list();
@@ -39,6 +45,28 @@ public class EventDao extends AbstractDao {
         return (Event) criteria.uniqueResult();
     }
 
+    public void occupyEvent(int eventid){
+        Event event = findEventById(eventid);
+        int current = event.getNumParticipants();
+        event.setNumParticipants(current+1);
+    }
+
+    public List<Event> searchNearbyEvents(int userid, ArrayList<Integer> filter)
+    {
+        FindDistance findDistance = new FindDistance();
+        UserData user = userDao.findUserById(userid);
+        double userlat = user.getGeolat();
+        double userlon = user.getGeolon();
+        List <Event> allEvents = findAllEventsNotReserved(filter);
+        ArrayList <Event> nearBy = new ArrayList <Event>();
+        for (Event event : allEvents){
+            double eventlat = event.getGeolat();
+            double eventlon = event.getGeolat();
+            double distance = findDistance.findDistance(userlat,userlon,eventlat,eventlon);
+            if (distance < 30.0) nearBy.add(event);
+        }
+        return nearBy;
+    }
     public void insertEvent(Event event) {
         persist(event);
     }

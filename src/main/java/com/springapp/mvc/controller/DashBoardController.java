@@ -76,6 +76,8 @@ public class DashBoardController {
 
     @RequestMapping(value = "/eventRsvp", method = RequestMethod.POST)
     public String rsvpEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation) throws SQLException {
+        int eventid = reservation.getEventid();
+        eventDao.occupyEvent(eventid);
         reservationDao.createReservation(reservation);
         return "redirect:/dashBoard";
     }
@@ -87,6 +89,26 @@ public class DashBoardController {
         session.invalidate();
 
         return "login";
+    }
+
+    @RequestMapping(value = "/searchNear", method = RequestMethod.GET)
+    public String getNearbyEvents(ModelMap model){
+        HttpSession current = LoginController.session;
+
+        if((current.getAttribute("userID") == null)) return "login";
+
+        int id = (int) current.getAttribute("userID");
+
+        UserData currentUser = userDao.findUserById(id);
+
+        List<Reservation> reservationList = reservationDao.findReservations(id);
+        ArrayList<Integer> filter = new ArrayList<Integer>();
+
+        List<Event> eventList = eventDao.searchNearbyEvents(id, filter);
+        model.addAttribute("eventList", eventList);
+        model.addAttribute("currentUser", currentUser);
+
+        return "dashBoard";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)

@@ -52,6 +52,28 @@ public class Event {
     @Column(name = "country", nullable = true)
     private String country;
 
+    @Column(name ="geolat", nullable = true)
+    private double geolat;
+
+    @Column(name ="geolon", nullable = true)
+    private double geolon;
+
+    public double getGeolat() {
+        return geolat;
+    }
+
+    public void setGeolat(double geolat) {
+        this.geolat = geolat;
+    }
+
+    public double getGeolon() {
+        return geolon;
+    }
+
+    public void setGeolon(double geolon) {
+        this.geolon = geolon;
+    }
+
     public int getId() {
         return id;
     }

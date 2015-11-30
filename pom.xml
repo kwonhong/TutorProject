@@ -19,6 +19,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.1</version>
+        </dependency>
 
         <!-- Additional Libaries-->
         <dependency>

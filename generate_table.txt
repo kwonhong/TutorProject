@@ -45,7 +45,12 @@ geolon DOUBLE,
 PRIMARY KEY (id)
 );
 
-
+CREATE TABLE IF NOT EXISTS reservation(
+id INT auto_increment,
+userid int,
+eventid int,
+PRIMARY KEY (id)
+);
 INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user1', '1234', 'Tom', 'Smith', '23 Hollywood Avenue', 'Toronto', 'Canada',  'M2N 7L8', 22, 'Male','user1@gmail.com',43.7056,-79.3980);
 INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user2', '0000', 'Tim', 'Schmit', '20 College Street', 'Toronto', 'Canada', 'M5G 1K2', 25, 'Male','user2@gmail.com',43.83874,-79.2734851);
 INSERT INTO userdata (username,password,firstname,lastname,address,city,country,postalcode,age,gender,email,geolat,geolon) VALUES('user3', 'user3password', 'Jenna', 'Ferguson', '252 Queen ST W', 'Toronto', 'Canada', 'M5V 1Z8', 34, 'Female','user3@gmail.com',43.2859,-79.19212);

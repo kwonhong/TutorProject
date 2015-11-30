@@ -1,73 +1,103 @@
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
-<%@ page import="com.springapp.mvc.dao.EventDao" %>
+<%--Tag Library for jsp--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>${currentUser.firstname} ${currentUser.lastname}'s Page</title>
+    <title>${currentUser.firstname}'s Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <style>
-        @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-        body{
-            margin: 0;
-            padding: 0;
-            background-image: url(http://i.imgur.com/4a2H5lF.jpg);
+        body {
+            background-size: cover;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            color: #fff;
-            font-family: 'Exo';
-            font-size: 12px;
-        }
-        .asText {
-            background:none;
-            border:none;
-            margin:0;
-            padding:0;
-            color: #fff;
-            font-family: 'Exo';
-            font-size: 15px;
-            font-weight: bold;
         }
     </style>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-Welcome ${currentUser.firstname}
 
-<p>  </p>
-<form role = "logout" method="POST" >
-    <button class = "asText" onclick="form.action='logout'">Log Out </button>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">FootyFix</a>
+        </div>
+
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/myPage">My Page</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<form role="User Profile">
+    <h1>Account Details</h1>
+    <fieldset class="row1">
+        <legend>Account Details
+        </legend>
+        <p>User Name:  ${currentUser.username}</p>
+        <p>E-mail:  ${currentUser.email}</p>
+    </fieldset>
+    <fieldset class="row2">
+        <legend>Personal Details
+        </legend>
+        <p>First Name:  ${currentUser.firstname}</p>
+        <p>Last Name:  ${currentUser.lastname}</p>
+        <p>Street Address:  ${currentUser.address}</p>
+        <p>City:  ${currentUser.city}</p>
+        <p>Country:  ${currentUser.country}</p>
+        <p>Postal Code:  ${currentUser.postalcode}</p>
+        <p>Gender:  ${currentUser.gender}</p>
+        <p>Age:  ${currentUser.age}</p>
+    </fieldset>
 </form>
+<button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+        onclick="form.action="edituserinfo">Edit Profile</button>
+</body>
 <hr>
-
-<c:forEach var="event" items="${reservedList}" >
-
-    <form role = "Reserved" method="POST" name = "${event.id}">
-        <table>
-            <span><p style ="font-size:20px" style="font-weight:bold"> <c style="color:lawngreen">${event.name}</c></p></span>
-            <tr>
-                <td>Date: ${event.date}</td>
-            </tr>
-            <tr>
-                <td>Currently Attending: ${event.description}</td>
-            </tr>
-
-            <td>
+<legend>Your Reservations
+</legend>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Event Name</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="event" items="${reservedList}">
+        <tr>
+            <form role="eventReservation" method="POST" name="${event.id}">
+                <td>${event.name}</td>
+                <td>${event.address}</td>
+                <td>${event.city}</td>
+                <td>${event.date}</td>
                 <input type="hidden" name="userid" value="${currentUser.id}"/>
                 <input type="hidden" name="eventid" value="${event.id}"/>
-                <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
-                        onclick="form.action='cancelRsvp'">Cancel</button></td>
-        </table>
-    </form>
-</c:forEach>
-
-<%--<a class = "btn btnPrimary" href="<c:url value='/eventCreate' />"> <i class="fa fa-edit fa-fw"></i>Create Event</a>--%>
-
-</body>
+                <td>
+                    <button type="submit" href="index.html" class="btn btn-sm" onclick="form.action='cancelRsvp'">
+                        Cancel Reservation
+                    </button>
+                </td>
+            </form>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<button type="return" href="index.html" class="btn btn-lg btn-success btn-block" onClick="history.go(-1);return true;">Return</button>
 </html>

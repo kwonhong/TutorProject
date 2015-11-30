@@ -9,22 +9,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>CSS Registration Form</title>
-  <style>
-    @font-face{
-      font-family: trench;
-      src: url('css/Junction-light.otf') format('opentype');
-    }
-  body {
-    color: #fff;
-    font-family: sans-serif;
-    font-size: 16px;
-    background-image: url(http://i.imgur.com/6AkCBJa.jpg);
-    background-size: cover;
-    }
-  </style>
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link rel="stylesheet" type="text/css" href="css/default.css"/>
 </head>
 <body>
 <form role="create new user" method="POST">
@@ -90,10 +77,11 @@
         <p>  </p><label>Male <input type="radio" name = "gender" value="Male"/></label>
        <label>Female <input type="radio" name = "gender" value="Female"/></label>
     </p>
-      <label>Age </label><input type="text" name="age"size="4" maxlength="4"/>
+      <label>Age <input type="text" name="age"size="4" maxlength="4"/></label>
     </p>
-    <div class="infobox"><h4>Helpful Information</h4>
-      <p>Here comes some explaining text, sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <div class="infobox"><h4>About FootyFix</h4>
+      <p>We are a football meet up site based in Toronto. We allow all amateur players of all ages and both gender</p>
+      <p>to half and full friendly football games that are otherwise very difficult to organize!</p>
     </div>
   </fieldset>
   <fieldset class="row4">

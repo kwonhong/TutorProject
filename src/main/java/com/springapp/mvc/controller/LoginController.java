@@ -112,4 +112,18 @@ public class LoginController {
         return "redirect:/dashBoard";
     }
 
+   /* @RequestMapping(value = "/dashBoard", method = {RequestMethod.GET})
+    public String notLoggedIn(ModelMap modelMap){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        String currentuser = (String) session.getAttribute("userID");
+
+        if (currentuser != null){
+            return "redirect:/dashBoard";
+        }
+        else {
+            return "redirect:/login";
+        }
+    }*/
+
 }

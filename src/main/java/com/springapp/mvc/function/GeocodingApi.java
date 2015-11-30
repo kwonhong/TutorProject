@@ -12,11 +12,13 @@ import java.util.List;
 
 public class GeocodingApi {
     final Geocoder geocoder = new Geocoder();
+    private GeocoderRequest geocoderRequest;
+    private GeocodeResponse geocoderResponse;
 
     public double getLatitude(String address) throws IOException {
         double lat = 0;
-            GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(address).getGeocoderRequest();
-            GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
+            geocoderRequest = new GeocoderRequestBuilder().setAddress(address).getGeocoderRequest();
+            geocoderResponse = geocoder.geocode(geocoderRequest);
             List<GeocoderResult> results = geocoderResponse.getResults();
             lat = results.get(0).getGeometry().getLocation().getLat().doubleValue();
         return lat;

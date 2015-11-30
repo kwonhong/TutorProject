@@ -25,10 +25,15 @@ public class ReservationDao extends AbstractDao {
         return reservations;
     }
 
-    public void deleteReservation(int id) {
-        String sql = "DELETE FROM reservation WHERE id ="+id+"";
-        Query query = getSession().createSQLQuery(sql);
-        query.executeUpdate();
+    public Reservation findReservationWithEventAndUserId(int userId, int eventId) {
+        Criteria criteria = getSession().createCriteria(Reservation.class);
+        criteria.add(Restrictions.eq("userid", userId));
+        criteria.add(Restrictions.eq("eventid", eventId));
+        return (Reservation) criteria.list().get(0);
+    }
+
+    public void deleteReservation(Reservation reservation) {
+        delete(reservation);
     }
 
 

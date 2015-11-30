@@ -58,7 +58,8 @@ Welcome ${currentUser.firstname}
                 <td>Currently Attending: ${event.description}</td>
             </tr>
 
-            <td><input type="hidden" name="userid" value="${currentUser.id}"/>
+            <td>
+                <input type="hidden" name="userid" value="${currentUser.id}"/>
                 <input type="hidden" name="eventid" value="${event.id}"/>
                 <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
                         onclick="form.action='cancelRsvp'">Cancel</button></td>

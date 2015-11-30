@@ -19,6 +19,12 @@ geolon DOUBLE,
 PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS reservation (
+id INT auto_increment,
+userid INT,
+eventid INT
+);
+
 CREATE TABLE IF NOT EXISTS event (
 id INT auto_increment,
 name TEXT,

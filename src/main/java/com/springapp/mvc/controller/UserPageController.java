@@ -55,9 +55,12 @@ public class UserPageController {
     }
 
     @RequestMapping(value ="/cancelRsvp", method = {RequestMethod.GET, RequestMethod.POST})
-    public String cancelReservation (ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation){
-        int id = reservation.getId();
-        reservationDao.deleteReservation(id);
+    public String cancelReservation (ModelMap modelMap,
+                                     @ModelAttribute("userid") int userID,
+                                     @ModelAttribute("eventid") int eventID){
+
+        Reservation reservation = reservationDao.findReservationWithEventAndUserId(userID, eventID);
+        reservationDao.deleteReservation(reservation);
         return "redirect:/myPage";
     }
 }

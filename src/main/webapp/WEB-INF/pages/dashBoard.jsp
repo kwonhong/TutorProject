@@ -37,6 +37,8 @@
     <%--</style>--%>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -75,10 +77,26 @@
 <%--</form>--%>
 <%--</c:forEach>--%>
 
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">FootyFix</a>
+        </div>
+
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/myPage">My Page</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
 
-    <br><br>
+
 
     <div class="row">
         <form role="search" action="/search">

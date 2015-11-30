@@ -61,8 +61,9 @@ public class EventDao extends AbstractDao {
         ArrayList <Event> nearBy = new ArrayList <Event>();
         for (Event event : allEvents){
             double eventlat = event.getGeolat();
-            double eventlon = event.getGeolat();
-            double distance = findDistance.findDistance(userlat,userlon,eventlat,eventlon);
+            double eventlon = event.getGeolon();
+            double distance = findDistance.haversine(userlat,userlon,eventlat,eventlon);
+            System.out.println(distance);
             if (distance < 30.0) nearBy.add(event);
         }
         return nearBy;

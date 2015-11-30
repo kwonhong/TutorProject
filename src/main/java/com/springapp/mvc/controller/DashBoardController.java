@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -86,5 +87,32 @@ public class DashBoardController {
         session.invalidate();
 
         return "login";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String getSearchResult(ModelMap model,
+                                  @RequestParam("searchText") String searchText) {
+
+        HttpSession current = LoginController.session;
+
+        if((current.getAttribute("userID") == null)) return "login";
+
+        int id = (int) current.getAttribute("userID");
+
+        UserData currentUser = userDao.findUserById(id);
+        List<Reservation> reservationList = reservationDao.findReservations(id);
+        ArrayList<Integer> filter = new ArrayList<Integer>();
+
+        for (Reservation r: reservationList) {
+            filter.add(r.getEventid());
+            System.out.println(r);
+        }
+
+        List<Event> eventList = eventDao.searchEventByQuery(filter, searchText);
+        model.addAttribute("eventList", eventList);
+        model.addAttribute("currentUser", currentUser);
+
+        return "dashBoard";
+
     }
 }

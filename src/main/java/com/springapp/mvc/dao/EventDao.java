@@ -56,4 +56,20 @@ public class EventDao extends AbstractDao {
         query.setInteger("id", eventID);
         query.executeUpdate();
     }
+
+    public List<Event> searchEventByQuery(ArrayList<Integer> filter, String searchInput) {
+        Criteria criteria = getSession().createCriteria(Event.class);
+        for (int a : filter){
+            criteria.add(Restrictions.ne("id", a));
+        }
+
+        List <Event> eventList = criteria.list();
+
+        String sqlQuery = "SELECT * from event where name LIKE \'%" + searchInput + "%\' OR " +
+                "description LIKE '%\" + searchInput + \"%'";
+        List<Event> eventList2 =  getSession().createSQLQuery(sqlQuery).addEntity(Event.class).list();
+
+        eventList.retainAll(eventList2);
+        return eventList;
+    }
 }

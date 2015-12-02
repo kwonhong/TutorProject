@@ -1,9 +1,10 @@
 package com.springapp.mvc.controller;
 
-import com.springapp.mvc.user.LoginData;
+import com.springapp.mvc.service.BasicFunctions;
+import com.springapp.mvc.model.LoginData;
 import com.springapp.mvc.dao.UserDao;
-import com.springapp.mvc.function.GeocodingApi;
-import com.springapp.mvc.user.UserData;
+import com.springapp.mvc.service.GeocodingApi;
+import com.springapp.mvc.model.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -47,11 +48,17 @@ public class LoginController {
         String password = loginData.getPassword();
 
         List<UserData> userDataList = userDao.findAllLoginData();
+        if (id.equalsIgnoreCase("admin") && password.equalsIgnoreCase(userDao.findUserByUserName("admin").getPassword())){
+            session.setAttribute("userID", userDao.findUserByUserName("admin").getId());
+            return "redirect:/adminPage";
+        }
+
         List<UserData> foundUsers1 = userDataList.stream()
                 .filter(userData -> userData.getEmail().equals(id) && userData.getPassword().equals(password))
                 .collect(Collectors.toList());
         List<UserData> foundUsers2 = userDataList.stream().filter(userData -> userData.
                 getUsername().equals(id) && userData.getPassword().equals(password)).collect(Collectors.toList());
+
 
         if (!foundUsers1.isEmpty() && foundUsers2.isEmpty()) {
             session.setAttribute("userID", foundUsers1.get(0).getId());
@@ -65,22 +72,6 @@ public class LoginController {
 
     }
 
-    private boolean isValidLoginData(String identification, String password) throws SQLException {
-        boolean result = false;
-//        Statement stmt = DBCon.createStatement();
-//        String sql = "SELECT * FROM user WHERE Email = '"+identification+"' AND Password = '"+password+"'";
-//        ResultSet rs = stmt.executeQuery(sql);
-//        if (rs.next()){
-//            result = true;
-//        }
-//        sql = "SELECT * FROM user WHERE ID = '"+identification+"' AND Password = '"+password+"'";
-//        rs = stmt.executeQuery(sql);
-//        if (rs.next()){
-//            result = true;
-//        }
-        return result;
-    }
-
     @RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
     public String redirectToRegisterPage(ModelMap modelMap) {
         return "register";
@@ -88,15 +79,13 @@ public class LoginController {
 
     @RequestMapping(value = "/registerSubmit", method = {RequestMethod.POST})
     public String registerUser(ModelMap modelMap, @ModelAttribute("SpringWeb") UserData userData) throws SQLException {
-        String a = userData.getAddress();
-        String b = userData.getCity();
-        String c = userData.getCountry();
-        String d = userData.getPostalcode();
+
         double lat = 0;
         double lon = 0;
 
-        String address = a + "," + b + "," + c +". " +d;
+        BasicFunctions fcn = new BasicFunctions();
         GeocodingApi Geocode = new GeocodingApi();
+        String address = fcn.userAddress(userData);
         try {
             lat = Geocode.getLatitude(address);
             lon = Geocode.getLongitude(address);
@@ -111,19 +100,4 @@ public class LoginController {
 
         return "redirect:/dashBoard";
     }
-
-   /* @RequestMapping(value = "/dashBoard", method = {RequestMethod.GET})
-    public String notLoggedIn(ModelMap modelMap){
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession();
-        String currentuser = (String) session.getAttribute("userID");
-
-        if (currentuser != null){
-            return "redirect:/dashBoard";
-        }
-        else {
-            return "redirect:/login";
-        }
-    }*/
-
 }

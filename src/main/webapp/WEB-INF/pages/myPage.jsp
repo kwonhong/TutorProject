@@ -28,7 +28,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">FootyFix</a>
+            <a class="navbar-brand" href="/dashBoard">FootyFix</a>
         </div>
 
         <div>
@@ -42,7 +42,7 @@
     </div>
 </nav>
 
-<form role="User Profile">
+<form role="User Profile" method = "POST">
     <h1>Account Details</h1>
     <fieldset class="row1">
         <legend>Account Details
@@ -62,9 +62,10 @@
         <p>Gender:  ${currentUser.gender}</p>
         <p>Age:  ${currentUser.age}</p>
     </fieldset>
+    <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+            onclick="form.action='editInfo'">Edit Profile</button>
 </form>
-<button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
-        onclick="form.action="edituserinfo">Edit Profile</button>
+
 </body>
 <hr>
 <legend>Your Reservations
@@ -90,6 +91,9 @@
                 <input type="hidden" name="userid" value="${currentUser.id}"/>
                 <input type="hidden" name="eventid" value="${event.id}"/>
                 <td>
+                    <button type="submit" href="index.html" class="btn btn-sm" onclick="form.action='yourEvent'">
+                        View Details
+                    </button>
                     <button type="submit" href="index.html" class="btn btn-sm" onclick="form.action='cancelRsvp'">
                         Cancel Reservation
                     </button>
@@ -99,5 +103,7 @@
     </c:forEach>
     </tbody>
 </table>
-<button type="return" href="index.html" class="btn btn-lg btn-success btn-block" onClick="history.go(-1);return true;">Return</button>
+<form name = "goback" method = "POST">
+    <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block" onClick="form.action='dashBoard'">Return</button>
+</form>
 </html>

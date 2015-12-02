@@ -1,4 +1,4 @@
-package com.springapp.mvc.event;
+package com.springapp.mvc.model;
 
 
 import javax.persistence.*;

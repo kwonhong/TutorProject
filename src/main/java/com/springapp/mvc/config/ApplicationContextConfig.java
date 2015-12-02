@@ -39,7 +39,6 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
-
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -84,5 +83,6 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
         txManager.setSessionFactory(s);
         return txManager;
     }
+
 
 }

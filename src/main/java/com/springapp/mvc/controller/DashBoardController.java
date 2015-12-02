@@ -3,9 +3,9 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.dao.EventDao;
 import com.springapp.mvc.dao.ReservationDao;
 import com.springapp.mvc.dao.UserDao;
-import com.springapp.mvc.event.Event;
-import com.springapp.mvc.event.Reservation;
-import com.springapp.mvc.user.UserData;
+import com.springapp.mvc.model.Event;
+import com.springapp.mvc.model.Reservation;
+import com.springapp.mvc.model.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,7 +35,7 @@ public class DashBoardController {
     @Autowired
     private ReservationDao reservationDao;
 
-    @RequestMapping(value = "/dashBoard", method = RequestMethod.GET)
+    @RequestMapping(value = "/dashBoard", method = {RequestMethod.GET, RequestMethod.POST})
     public String defaultPage(ModelMap model) {
         HttpSession current = LoginController.session;
 
@@ -49,12 +49,11 @@ public class DashBoardController {
 
         for (Reservation r: reservationList) {
             filter.add(r.getEventid());
-            System.out.println(r);
+           // System.out.println(r);
         }
 
-
+        String gender = currentUser.getGender();
         List<Event> eventList = eventDao.findAllEventsNotReserved(filter);
-
 
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
@@ -63,20 +62,36 @@ public class DashBoardController {
         return "dashBoard";
     }
 
-    @RequestMapping(value = "/eventCreate", method = RequestMethod.GET)
-    public String redirectEventCreatePage(ModelMap modelMap) {
-        System.out.println("C");
-        return "eventRegistration";
+    @RequestMapping(value = "/eventDetails", method = {RequestMethod.GET, RequestMethod.POST})
+    public String showEventDetails(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation) throws SQLException {
+        HttpSession current = LoginController.session;
+
+        if((current.getAttribute("userID") == null)) return "login";
+
+        int eventid = reservation.getEventid();
+        int id = (int) current.getAttribute("userID");
+
+
+        UserData currentUser = userDao.findUserById(id);
+        Event thisEvent = eventDao.findEventById(eventid);
+        modelMap.addAttribute("currentUser", currentUser);
+        modelMap.addAttribute("currentEvent", thisEvent);
+        return "eventDetails";
     }
 
-    @RequestMapping(value = "/eventCreateSubmit", method = RequestMethod.POST)
-    public String submitEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Event soccerEvent) {
-        return "dashBoard";
-    }
 
     @RequestMapping(value = "/eventRsvp", method = RequestMethod.POST)
     public String rsvpEvent(ModelMap modelMap, @ModelAttribute("SpringWeb") Reservation reservation) throws SQLException {
         int eventid = reservation.getEventid();
+        int userid = reservation.getUserid();
+
+        String event_sex = eventDao.findEventById(eventid).getGender();
+        String user_sex = userDao.findUserById(userid).getGender();
+
+        if (!event_sex.equalsIgnoreCase(user_sex) && !event_sex.equalsIgnoreCase("Mixed")){
+            return "redirect:/dashBoard";
+        }
+
         eventDao.occupyEvent(eventid);
         reservationDao.createReservation(reservation);
         return "redirect:/dashBoard";
@@ -103,6 +118,10 @@ public class DashBoardController {
 
         List<Reservation> reservationList = reservationDao.findReservations(id);
         ArrayList<Integer> filter = new ArrayList<Integer>();
+        for (Reservation r: reservationList) {
+            filter.add(r.getEventid());
+            // System.out.println(r);
+        }
 
         List<Event> eventList = eventDao.searchNearbyEvents(id, filter);
         model.addAttribute("eventList", eventList);

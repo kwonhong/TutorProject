@@ -1,4 +1,6 @@
-package com.springapp.mvc.event;
+package com.springapp.mvc.model;
+
+import org.joda.time.DateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,9 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "type", nullable = false)
+    private String type;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -171,4 +176,12 @@ public class Event {
     public String getCountry() {return country;}
 
     public void setCountry(String country) {this.country = country;}
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

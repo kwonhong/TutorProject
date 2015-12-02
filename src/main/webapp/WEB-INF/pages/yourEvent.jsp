@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Event Details for ${currentEvent.name}</title>
+    <title>Your reserved event</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <style>
         body {
@@ -43,7 +43,7 @@
 </nav>
 
 <form role="Event details">
-    <h1>Event Details</h1>
+    <h1>Account Details</h1>
     <fieldset class="row1">
         <legend>Event Location
         </legend>
@@ -65,11 +65,9 @@
     </fieldset>
 </form>
 <hr>
-<form name = "confirm" method = POST>
-    <input type="hidden" name="userid" value="${currentUser.id}"/>
-    <input type="hidden" name="eventid" value="${currentEvent.id}"/>
-<button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
-        onclick="form.action='eventRsvp'">Confirm my reservation</button>
-</form>
+
+    <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+            onclick="history.go(-1);return true;">Go back</button>
+
 </body>
 </html>

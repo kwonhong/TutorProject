@@ -1,9 +1,8 @@
 package com.springapp.mvc.dao;
 
 
-import com.springapp.mvc.event.Reservation;
+import com.springapp.mvc.model.Reservation;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +29,12 @@ public class ReservationDao extends AbstractDao {
         criteria.add(Restrictions.eq("userid", userId));
         criteria.add(Restrictions.eq("eventid", eventId));
         return (Reservation) criteria.list().get(0);
+    }
+
+    public List<Reservation> findReservationsByEvent(int eventId){
+        Criteria criteria = getSession().createCriteria(Reservation.class);
+        criteria.add(Restrictions.eq("eventid", eventId));
+        return criteria.list();
     }
 
     public void deleteReservation(Reservation reservation) {

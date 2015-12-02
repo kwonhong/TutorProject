@@ -1,4 +1,4 @@
-package com.springapp.mvc.user;
+package com.springapp.mvc.model;
 
 
 public class LoginData {

@@ -1,21 +1,15 @@
 package com.springapp.mvc.dao;
 
-import com.springapp.mvc.event.Event;
-import com.springapp.mvc.event.Reservation;
-import com.springapp.mvc.function.FindDistance;
-import com.springapp.mvc.user.UserData;
+import com.springapp.mvc.model.Event;
+import com.springapp.mvc.service.BasicFunctions;
+import com.springapp.mvc.model.UserData;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
-import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Array;
-import java.sql.ResultSet;
 import java.util.*;
 
 
@@ -51,9 +45,14 @@ public class EventDao extends AbstractDao {
         event.setNumParticipants(current+1);
     }
 
+    public void freeUpSLot(int eventid){
+        Event event = findEventById(eventid);
+        int current = event.getNumParticipants();
+        event.setNumParticipants(current - 1);
+    }
     public List<Event> searchNearbyEvents(int userid, ArrayList<Integer> filter)
     {
-        FindDistance findDistance = new FindDistance();
+        BasicFunctions findDistance = new BasicFunctions();
         UserData user = userDao.findUserById(userid);
         double userlat = user.getGeolat();
         double userlon = user.getGeolon();
@@ -70,10 +69,6 @@ public class EventDao extends AbstractDao {
     }
     public void insertEvent(Event event) {
         persist(event);
-    }
-
-    public void updateEvent(Event event) {
-        getSession().update(event);
     }
 
     public void deleteEvent(Event event) {

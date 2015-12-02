@@ -3,7 +3,10 @@ package com.springapp.mvc.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public abstract class AbstractDao {
 
 	@Autowired
@@ -20,4 +23,6 @@ public abstract class AbstractDao {
 	public void delete(Object entity) {
 		getSession().delete(entity);
 	}
+
+	public void update(Object entity) { getSession().update(entity);}
 }

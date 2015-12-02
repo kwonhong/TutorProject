@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
-<body>
+<body><div class = "container">
 <form role="create new user" method="POST">
   <h1>Registration</h1>
   <fieldset class="row1">
@@ -73,9 +73,10 @@
     <legend>Further Information
     </legend>
     <p>
-      <label>Gender</label><br>
-        <p>  </p><label>Male <input type="radio" name = "gender" value="Male"/></label>
-       <label>Female <input type="radio" name = "gender" value="Female"/></label>
+      <label>Gender</label><table>
+        <td>Male <input type="radio" name = "gender" value="Male"/></td>
+       <td>Female <input type="radio" name = "gender" value="Female"/></td>
+    </table>
     </p>
       <label>Age <input type="text" name="age"size="4" maxlength="4"/></label>
     </p>
@@ -101,10 +102,13 @@
     </p>
     <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
             onclick="form.action='registerSubmit'">Submit</button>
-    <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
-            onclick="form.action='login'">Cancel</button>
   </fieldset>
 </form>
+  <form role="cancel" method="GET">
+  <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+          onclick="form.action='login'">Cancel</button>
+    </form>
+  </div>
 </body>
 </html>
 

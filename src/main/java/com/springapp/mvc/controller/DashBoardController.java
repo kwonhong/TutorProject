@@ -6,6 +6,7 @@ import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.model.Event;
 import com.springapp.mvc.model.Reservation;
 import com.springapp.mvc.model.UserData;
+import com.springapp.mvc.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -87,6 +88,9 @@ public class DashBoardController {
 
         String event_sex = eventDao.findEventById(eventid).getGender();
         String user_sex = userDao.findUserById(userid).getGender();
+        String user_email = userDao.findUserById(userid).getEmail();
+        String event_name = eventDao.findEventById(eventid).getName();
+        String event_date = eventDao.findEventById(userid).getDate();
 
         if (!event_sex.equalsIgnoreCase(user_sex) && !event_sex.equalsIgnoreCase("Mixed")){
             return "redirect:/dashBoard";
@@ -94,6 +98,8 @@ public class DashBoardController {
 
         eventDao.occupyEvent(eventid);
         reservationDao.createReservation(reservation);
+        EmailService email = new EmailService();
+        email.sendEmail(user_email,);
         return "redirect:/dashBoard";
     }
 

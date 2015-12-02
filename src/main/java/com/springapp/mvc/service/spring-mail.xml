@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- Mail sender bean -->
+    <bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="my.smtp.host" />
+        <property name="username" value="footyfixtoronto" />
+        <property name="password" value="footyfixadmin" />
+    </bean>
+
+    <!--Mail Reference-->
+    <bean id="mailMail" class="com.springapp.mvc.service.EmailService">
+        <property name="mailSender" ref="mailSender" />
+    </bean>
+
+    <!-- Simple mail template -->
+    <bean id="basicEmailMessage"
+          class="org.springframework.mail.SimpleMailMessage">
+        <property name="from">
+            <value>whateverSenderAddress</value>
+        </property>
+    </bean>
+
+
+</beans>

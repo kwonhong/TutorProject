@@ -37,7 +37,7 @@ public class Event {
     private String gender;
 
     @Column(name = "date", nullable = false)
-    private Date date;
+    private String date;
 
     @Column(name = "minimumAge", nullable = true)
     private int minimumAge;
@@ -127,11 +127,11 @@ public class Event {
         this.gender = gender;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

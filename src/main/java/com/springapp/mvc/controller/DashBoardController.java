@@ -8,6 +8,9 @@ import com.springapp.mvc.model.Reservation;
 import com.springapp.mvc.model.UserData;
 import com.springapp.mvc.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,6 +39,9 @@ public class DashBoardController {
 
     @Autowired
     private ReservationDao reservationDao;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(value = "/dashBoard", method = {RequestMethod.GET, RequestMethod.POST})
     public String defaultPage(ModelMap model) {
@@ -55,6 +62,12 @@ public class DashBoardController {
 
         String gender = currentUser.getGender();
         List<Event> eventList = eventDao.findAllEventsNotReserved(filter);
+
+        for (Event event: eventList){
+            if (event.getNumParticipants() == event.getCapacity()){
+                eventList.remove(event);
+            }
+        }
 
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
@@ -90,16 +103,19 @@ public class DashBoardController {
         String user_sex = userDao.findUserById(userid).getGender();
         String user_email = userDao.findUserById(userid).getEmail();
         String event_name = eventDao.findEventById(eventid).getName();
-        String event_date = eventDao.findEventById(userid).getDate();
+        String event_date = eventDao.findEventById(eventid).getDate();
 
         if (!event_sex.equalsIgnoreCase(user_sex) && !event_sex.equalsIgnoreCase("Mixed")){
+            System.out.println("Shouldn't be here though");
             return "redirect:/dashBoard";
         }
 
         eventDao.occupyEvent(eventid);
         reservationDao.createReservation(reservation);
-        EmailService email = new EmailService();
-        email.sendEmail(user_email,);
+        try {
+            System.out.println("I am here");
+            emailService.sendEmail(user_email, "footyfixtoronto@gmail.com", "Your Reservation for " + event_name + " is confirmed", "Your event is on " + event_date + ".");
+        }catch (Exception e) {}
         return "redirect:/dashBoard";
     }
 

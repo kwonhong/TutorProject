@@ -1,41 +1,35 @@
 package com.springapp.mvc.service;
 
-import javafx.application.Application;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
+
+@Component
 public class EmailService {
-        private MailSender mailSender;
-        private SimpleMailMessage emailTemplate;
+
+        @Autowired
+        private JavaMailSender mailSender;
+
 
         public void sendEmail(String to, String from, String subject, String body)
-                throws MailException {
-            SimpleMailMessage message = new SimpleMailMessage(this.emailTemplate);
-            message.setTo(to);
-            message.setFrom(from);
+                throws Exception {
+            System.out.println("I am here");
+            MimeMessage message = mailSender.createMimeMessage();
+            message.setRecipient(RecipientType.TO, new InternetAddress(to));
+            message.setFrom(new InternetAddress(from));
             message.setSubject(subject);
             message.setText(body);
-            mailSender.send(message);
+
+            try {
+                mailSender.send(message);
+            }catch (MailException e){e.printStackTrace();}
         }
-
-        public void setMailSender(MailSender mailSender) {
-            this.mailSender = mailSender;
-        }
-        public void setEmailTemplate(SimpleMailMessage emailTemplate) {
-            this.emailTemplate = emailTemplate;
-        }
-
-    public static void sendMail(String email, String subject, String body){
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-mail.xml");
-
-        EmailService mail = (EmailService) context.getBean("mailMail");
-        mail.sendEmail("footyfixtoronto@gmail.com",""+email+"",""+subject+"",""+body+"");
-
-    }
 
 }
 

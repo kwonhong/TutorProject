@@ -53,5 +53,7 @@
         <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
                 onclick="form.action='editUserSubmit'">Submit</button>
 </form>
+<button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+        onclick="history.go(-1);return true;">Return</button>
 </body>
 </html>

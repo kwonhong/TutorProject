@@ -70,6 +70,8 @@
     <input type="hidden" name="eventid" value="${currentEvent.id}"/>
 <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
         onclick="form.action='eventRsvp'">Confirm my reservation</button>
+    <button type="submit" href="index.html" class="btn btn-lg btn-success btn-block"
+            onclick="form.action='dashBoard'">Return</button>
 </form>
 </body>
 </html>

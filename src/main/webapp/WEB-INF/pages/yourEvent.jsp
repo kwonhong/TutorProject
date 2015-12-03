@@ -43,7 +43,7 @@
 </nav>
 
 <form role="Event details">
-    <h1>Account Details</h1>
+    <h1>Game Details</h1>
     <fieldset class="row1">
         <legend>Event Location
         </legend>

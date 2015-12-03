@@ -2,9 +2,6 @@ package com.springapp.mvc.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * Created by honkwon on 15-09-20.
- */
 public class SpringWebAppInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
 

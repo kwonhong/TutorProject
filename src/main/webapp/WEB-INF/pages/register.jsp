@@ -90,7 +90,7 @@
     </legend>
     <p class="agreement">
       <input type="checkbox" value="" required/>
-      <label>I accept the <a href="terms">Terms and Conditions</a></label>
+      <label>I accept the <a href="terms.html">Terms and Conditions</a></label>
     </p>
     <p class="agreement">
       <input type="checkbox" value=""/>

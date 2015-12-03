@@ -42,7 +42,6 @@ public class AdminController {
         return "adminPage";
     }
 
-
     @RequestMapping(value = "/eventDelete", method = {RequestMethod.GET, RequestMethod.POST})
     public String deleteEvent(ModelMap modelMap, @ModelAttribute("eventid") int eventID) {
         Event event = eventDao.findEventById(eventID);

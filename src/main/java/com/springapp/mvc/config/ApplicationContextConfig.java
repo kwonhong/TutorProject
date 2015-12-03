@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -83,6 +86,34 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 
     }
+
+    @Value("smtp.gmail.com")
+    private String host;
+
+    @Value("587")
+    private Integer port;
+
+    @Bean
+    public JavaMailSender javaMailService() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+        javaMailSender.setHost(host);
+        javaMailSender.setPort(port);
+        javaMailSender.setPassword("footyfixadmin");
+        javaMailSender.setUsername("footyfixtoronto@gmail.com");
+        javaMailSender.setJavaMailProperties(getMailProperties());
+        return javaMailSender;
+    }
+
+    private Properties getMailProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.debug", "true");
+        properties.setProperty("mail.transport.protocol","smtp");
+        return properties;
+    }
+
 }
 
 

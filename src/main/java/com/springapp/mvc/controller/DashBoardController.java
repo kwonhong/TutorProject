@@ -6,11 +6,9 @@ import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.model.Event;
 import com.springapp.mvc.model.Reservation;
 import com.springapp.mvc.model.UserData;
+import com.springapp.mvc.service.BasicServices;
 import com.springapp.mvc.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +21,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -43,6 +40,8 @@ public class DashBoardController {
     @Autowired
     private EmailService emailService;
 
+    public BasicServices basicServices;
+
     @RequestMapping(value = "/dashBoard", method = {RequestMethod.GET, RequestMethod.POST})
     public String defaultPage(ModelMap model) {
         HttpSession current = LoginController.session;
@@ -50,8 +49,14 @@ public class DashBoardController {
         if((current.getAttribute("userID") == null)) return "login";
 
         int id = (int) current.getAttribute("userID");
-
         UserData currentUser = userDao.findUserById(id);
+
+        // for search results
+        if((current.getAttribute("search")) != null){
+            model.addAttribute("eventList", (current.getAttribute("search")));
+            model.addAttribute("currentUser", currentUser);
+        }
+
         List<Reservation> reservationList = reservationDao.findReservations(id);
         ArrayList<Integer> filter = new ArrayList<Integer>();
 
@@ -60,14 +65,9 @@ public class DashBoardController {
            // System.out.println(r);
         }
 
-        String gender = currentUser.getGender();
         List<Event> eventList = eventDao.findAllEventsNotReserved(filter);
-
-        for (Event event: eventList){
-            if (event.getNumParticipants() == event.getCapacity()){
-                eventList.remove(event);
-            }
-        }
+        List<Event> toRemove = basicServices.filterAgeGenderReserved(eventList, currentUser);
+        eventList.removeAll(toRemove);
 
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
@@ -99,24 +99,22 @@ public class DashBoardController {
         int eventid = reservation.getEventid();
         int userid = reservation.getUserid();
 
-        String event_sex = eventDao.findEventById(eventid).getGender();
-        String user_sex = userDao.findUserById(userid).getGender();
-        String user_email = userDao.findUserById(userid).getEmail();
-        String event_name = eventDao.findEventById(eventid).getName();
-        String event_date = eventDao.findEventById(eventid).getDate();
+        UserData user = userDao.findUserById(userid);
+        Event event = eventDao.findEventById(eventid);
 
-        if (!event_sex.equalsIgnoreCase(user_sex) && !event_sex.equalsIgnoreCase("Mixed")){
-            System.out.println("Shouldn't be here though");
-            return "redirect:/dashBoard";
-        }
+        String user_email = user.getEmail();
+        String event_name = event.getName();
+        String event_date = event.getDate();
+
+
 
         eventDao.occupyEvent(eventid);
         reservationDao.createReservation(reservation);
         try {
-            System.out.println("I am here");
-            emailService.sendEmail(user_email, "footyfixtoronto@gmail.com", "Your Reservation for " + event_name + " is confirmed", "Your event is on " + event_date + ".");
+            emailService.sendEmail(user_email, "footyfixtoronto@gmail.com", "Your Reservation for " + event_name + " is confirmed", "Hello "+user.getFirstname()+
+                    ",\nWe received your confirmation\nYour event is on " + event_date + " at "+event_name);
         }catch (Exception e) {}
-        return "redirect:/dashBoard";
+        return "dashBoard";
     }
 
     @RequestMapping(value ="/logout", method = {RequestMethod.GET, RequestMethod.POST})
@@ -142,12 +140,17 @@ public class DashBoardController {
         ArrayList<Integer> filter = new ArrayList<Integer>();
         for (Reservation r: reservationList) {
             filter.add(r.getEventid());
-            // System.out.println(r);
         }
 
         List<Event> eventList = eventDao.searchNearbyEvents(id, filter);
+        List<Event> toRemove = basicServices.filterAgeGenderReserved(eventList, currentUser);
+        eventList.removeAll(toRemove);
+
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
+
+        current.setAttribute("search", eventList);
+
 
         return "dashBoard";
     }
@@ -172,8 +175,12 @@ public class DashBoardController {
         }
 
         List<Event> eventList = eventDao.searchEventByQuery(filter, searchText);
+        List<Event> toRemove = basicServices.filterAgeGenderReserved(eventList, currentUser);
+        eventList.removeAll(toRemove);
         model.addAttribute("eventList", eventList);
         model.addAttribute("currentUser", currentUser);
+
+        current.setAttribute("search", eventList);
 
         return "dashBoard";
 

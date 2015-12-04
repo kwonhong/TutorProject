@@ -5,6 +5,7 @@ import com.springapp.mvc.dao.ReservationDao;
 import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.model.Event;
 import com.springapp.mvc.model.Reservation;
+import com.springapp.mvc.service.EmailService;
 import com.springapp.mvc.service.GeocodingApi;
 import com.springapp.mvc.model.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserPageController {
 
     @Autowired
     private EventDao eventDao;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(value = "/myPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String defaultPage(ModelMap model) {
@@ -62,6 +66,18 @@ public class UserPageController {
         Reservation reservation = reservationDao.findReservationWithEventAndUserId(userID, eventID);
         reservationDao.deleteReservation(reservation);
         eventDao.freeUpSLot(eventID);
+
+        UserData user = userDao.findUserById(userID);
+        Event event = eventDao.findEventById(eventID);
+
+        String user_email = user.getEmail();
+        String event_name = event.getName();
+        String event_date = event.getDate();
+
+        try {
+            emailService.sendEmail(user_email, "footyfixtoronto@gmail.com", "Your Reservation for " + event_name + " is cancelled", "Hello "+user.getFirstname()+
+                    ",\nWe received your cancellation of game taking place at "+event_name);
+        }catch (Exception e) {}
         return "redirect:/myPage";
     }
 

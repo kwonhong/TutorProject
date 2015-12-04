@@ -4,7 +4,10 @@ package com.springapp.mvc.service;
 import com.springapp.mvc.model.Event;
 import com.springapp.mvc.model.UserData;
 
-public class BasicFunctions {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BasicServices {
 
     public static double haversine(double lat1, double lon1, double lat2, double lon2) {
         double r = 6372.8;
@@ -37,5 +40,16 @@ public class BasicFunctions {
         String address = a + "," + b + "," + c +". " +d;
 
         return address;
+    }
+
+    public static List<Event> filterAgeGenderReserved(List<Event> eventList, UserData currentUser){
+        ArrayList<Event> toRemove = new ArrayList<>();
+        for (Event event: eventList) {
+            if (event.getNumParticipants() == event.getCapacity() || currentUser.getAge() > event.getMaximumAge() ||
+                    currentUser.getAge() < event.getMinimumAge() || (!event.getGender().equalsIgnoreCase(currentUser.getGender()) && !event.getGender().equalsIgnoreCase("Mixed"))) {
+                toRemove.add(event);
+            }
+        }
+        return toRemove;
     }
 }

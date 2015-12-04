@@ -1,7 +1,7 @@
 package com.springapp.mvc.dao;
 
 import com.springapp.mvc.model.Event;
-import com.springapp.mvc.service.BasicFunctions;
+import com.springapp.mvc.service.BasicServices;
 import com.springapp.mvc.model.UserData;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -52,7 +52,7 @@ public class EventDao extends AbstractDao {
     }
     public List<Event> searchNearbyEvents(int userid, ArrayList<Integer> filter)
     {
-        BasicFunctions findDistance = new BasicFunctions();
+        BasicServices findDistance = new BasicServices();
         UserData user = userDao.findUserById(userid);
         double userlat = user.getGeolat();
         double userlon = user.getGeolon();

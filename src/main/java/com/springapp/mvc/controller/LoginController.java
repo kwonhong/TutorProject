@@ -1,6 +1,6 @@
 package com.springapp.mvc.controller;
 
-import com.springapp.mvc.service.BasicFunctions;
+import com.springapp.mvc.service.BasicServices;
 import com.springapp.mvc.model.LoginData;
 import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.service.GeocodingApi;
@@ -83,7 +83,7 @@ public class LoginController {
         double lat = 0;
         double lon = 0;
 
-        BasicFunctions fcn = new BasicFunctions();
+        BasicServices fcn = new BasicServices();
         GeocodingApi Geocode = new GeocodingApi();
         String address = fcn.userAddress(userData);
         try {

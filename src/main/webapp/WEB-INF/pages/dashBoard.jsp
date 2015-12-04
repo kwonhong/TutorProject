@@ -58,7 +58,8 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Event Name</th>
+            <th>Venue Name</th>
+            <th>Game Date</th>
             <th># Participants</th>
             <th># Available Spots</th>
             <th></th>
@@ -69,6 +70,7 @@
             <tr>
                 <form role="eventReservation" method="POST" name="${event.id}">
                     <td>${event.name}</td>
+                    <td>${event.date}</td>
                     <td>${event.getNumParticipants()}</td>
                     <td>${event.getCapacity() - event.getNumParticipants()}</td>
                     <input type="hidden" name="userid" value="${currentUser.id}"/>

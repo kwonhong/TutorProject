@@ -7,6 +7,7 @@ import com.springapp.mvc.dao.UserDao;
 import com.springapp.mvc.model.Event;
 import com.springapp.mvc.model.Reservation;
 import com.springapp.mvc.service.BasicServices;
+import com.springapp.mvc.service.EmailService;
 import com.springapp.mvc.service.GeocodingApi;
 import com.springapp.mvc.model.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class AdminController {
     @Autowired
     private ReservationDao reservationDao;
 
+    @Autowired
+    private EmailService emailService;
+
     @RequestMapping(value = "/adminPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String adminPage(ModelMap model){
         HttpSession current = LoginController.session;
@@ -47,7 +51,17 @@ public class AdminController {
         Event event = eventDao.findEventById(eventID);
         eventDao.deleteEvent(event);
         List <Reservation> reservations = reservationDao.findReservationsByEvent(eventID);
-        for (Reservation reservation : reservations) reservationDao.delete(reservation);
+        for (Reservation reservation : reservations) {
+            UserData user = userDao.findUserById(reservation.getUserid());
+            String email = user.getEmail();
+
+            try {
+                emailService.sendEmail(email, "footyfixtoronto@gmail.com", "Your Reservation for " + event.getName() + " is cancelled", "Hello "+user.getFirstname()+
+                        ",\nThe event on "+event.getDate()+" has been cancelled. We apologize for your inconvenience");
+            }catch (Exception e) {}
+
+            reservationDao.delete(reservation);
+        }
         return "redirect: adminPage";
     }
 
